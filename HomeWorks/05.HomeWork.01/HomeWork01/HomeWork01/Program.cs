@@ -1,12 +1,16 @@
 ﻿const int MaxLineWidth = 40;
+const int MinInputNumberValue = 1;
+const int MaxInputNumberValue = 6;
 const string NumberInputMessage = "Введите целое числло:";
-const string NumberInputError = "Введите число от 1 до 6";
+const string NumberInputError = "Введите целое число от 1 до 6";
 const string TextInputMessage = "Введите строку:";
 const string TextInputError = "Текст не может быть пустым";
 const string TotalWidthMessage = "Общая ширина не должна превышать {0} символов";
 const char Border = '+';
 
 int n = GetNumberFromUser();
+if (!IsValidNumberInput(n))
+    return;
 string text = GetStringFromUser();
 WriteTable(n, text);
 
@@ -14,7 +18,7 @@ static int GetNumberFromUser()
 {
     Console.WriteLine(NumberInputMessage);
     if (!int.TryParse(Console.ReadLine(), out var number))
-        number = -1;
+        number = 0;
     return number;
 }
 
@@ -26,7 +30,7 @@ static string GetStringFromUser()
 
 static void WriteTable(int n, string s)
 {
-    if (!(IsValidInput(n, s)))
+    if (!IsValidInput(n, s))
         return;
 
     var width = GetBandWidth(n, s.Length);
@@ -102,31 +106,38 @@ static string[] GetCanvas(int n)
     return canvas;
 }
 
-static string GetBorderLine(int w) => new string(Border, w);
+static string GetBorderLine(int w) =>
+    new string(Border, w);
 
-static int GetBandWidth(int n, int len) => (n << 1) + len;
+static int GetBandWidth(int n, int len) =>
+    (n << 1) + len;
 
-static int GetCanvasLinesCount(int n) => (n << 1) - 1;
+static int GetCanvasLinesCount(int n) =>
+    (n << 1) - 1;
 
 static void PrintBand(string[] band) =>
     Array.ForEach(band, Console.WriteLine);
 
-static bool IsValidInput(int n, string s)
+static bool IsValidNumberInput(int n)
 {
-    if (n < 1 || n > 6)
+    if (n is < MinInputNumberValue or > MaxInputNumberValue)
     {
         Console.WriteLine(NumberInputError);
         return false;
     }
-    if (string.IsNullOrEmpty(s))
+    return true;
+}
+
+static bool IsValidInput(int n, string s)
+{
+    switch (true)
     {
-        Console.WriteLine(TextInputError);
-        return false;
-    }
-    if (s.Length + n + n > MaxLineWidth)
-    {
-        Console.WriteLine(string.Format(TotalWidthMessage, MaxLineWidth));
-        return false;
+        case true when string.IsNullOrEmpty(s):
+            Console.WriteLine(TextInputError);
+            return false;
+        case true when s.Length + n + n > MaxLineWidth:
+            Console.WriteLine(string.Format(TotalWidthMessage, MaxLineWidth));
+            return false;
     }
     return true;
 }
