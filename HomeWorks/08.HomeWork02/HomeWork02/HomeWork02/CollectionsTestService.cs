@@ -5,12 +5,12 @@ namespace HomeWork02;
 
 public class CollectionsTestService
 {
-    private const int _elementsCount = 1_000_000;
+    private const int ElementsCount = 1_000_000;
     private const int SeekElementIndex = 496_753;
     private const int Divider = 777;
-    private ListHandler _listHandler = new ListHandler(_elementsCount);
-    private LinkedListHandler _linkedListHandler = new LinkedListHandler(_elementsCount);
-    private ArrayListHandler _arrayListHandler = new ArrayListHandler(_elementsCount);
+    private ListHandler _listHandler = new ListHandler(ElementsCount);
+    private LinkedListHandler _linkedListHandler = new LinkedListHandler(ElementsCount);
+    private ArrayListHandler _arrayListHandler = new ArrayListHandler(ElementsCount);
 
     #region Adding elements
 
