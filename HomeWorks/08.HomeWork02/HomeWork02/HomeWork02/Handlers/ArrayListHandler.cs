@@ -43,6 +43,13 @@ public class ArrayListHandler
         Console.WriteLine();
     }
 
-    private int ElementAt(int index) =>
-        (int)(_unDefinedCapacityList[index] ?? 0);
+    private int ElementAt(int index)
+    {
+        var defaultValue = -1;
+        if (index < 0 || index >= _unDefinedCapacityList.Count)
+            return defaultValue;
+        return (int)(_unDefinedCapacityList[index] ?? defaultValue);
+        
+    }
+        
 }

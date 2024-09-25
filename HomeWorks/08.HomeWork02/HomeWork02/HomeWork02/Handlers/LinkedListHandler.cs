@@ -28,8 +28,13 @@ public class LinkedListHandler
         }
     }
 
-    public int GetElement(int index) =>
-        _linkedList.ElementAt(index);
+    public int GetElement(int index)
+    {
+        if (index < 0 || index >= _linkedList.Count)
+            return -1;
+        return _linkedList.ElementAt(index);
+    }
+        
 
     public void PrintCleanDivisionElements(int divider)
     {

@@ -1,4 +1,6 @@
-﻿namespace HomeWork02.Handlers;
+﻿using System.IO.IsolatedStorage;
+
+namespace HomeWork02.Handlers;
 public class ListHandler
 {
     private int _elementsCount;
@@ -30,8 +32,13 @@ public class ListHandler
         }
     }
 
-    public int GetElement(int index) =>
-        _unDefinedCapacityList.ElementAt(index);
+    public int GetElement(int index)
+    {
+        if (index < 0 || index >= _unDefinedCapacityList.Count)
+            return -1;
+        return _unDefinedCapacityList.ElementAt(index);
+    }
+        
 
     public void PrintCleanDivisionElements(int divider)
     {
