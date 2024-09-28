@@ -11,8 +11,8 @@ public class QuickBenchmarkConfig : ManualConfig
     {
         AddJob(Job.Default
             .WithIterationCount(5)
-            .WithWarmupCount(1));
-
+            .WithWarmupCount(2));
+        
         AddLogger(ConsoleLogger.Default);
         AddExporter(MarkdownExporter.Default);
         AddColumnProvider(DefaultColumnProviders.Instance);

@@ -1,4 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
 using HomeWork02;
 
-var summary = BenchmarkRunner.Run<CollectionsTestService>(new QuickBenchmarkConfig());
+var summary = BenchmarkRunner.Run<CollectionsBenchmark>(new QuickBenchmarkConfig());

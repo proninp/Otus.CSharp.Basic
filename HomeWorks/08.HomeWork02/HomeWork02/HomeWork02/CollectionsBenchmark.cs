@@ -3,16 +3,26 @@ using HomeWork02.Handlers;
 
 namespace HomeWork02;
 
-public class CollectionsTestService
+[HideColumns("Error", "StdDev", "Median", "Gen0", "Gen1")]
+[MemoryDiagnoser]
+public class CollectionsBenchmark
 {
     private const int ElementsCount = 1_000_000;
     private const int SeekElementIndex = 496_753;
     private const int Divider = 777;
-    private ListHandler _listHandler = new ListHandler(ElementsCount);
-    private LinkedListHandler _linkedListHandler = new LinkedListHandler(ElementsCount);
-    private ArrayListHandler _arrayListHandler = new ArrayListHandler(ElementsCount);
+    private ListHandler _listHandler;
+    private LinkedListHandler _linkedListHandler;
+    private ArrayListHandler _arrayListHandler;
 
     #region Adding elements
+
+    [GlobalSetup]
+    public void Setup()
+    {
+        _listHandler = new ListHandler(ElementsCount);
+        _linkedListHandler = new LinkedListHandler(ElementsCount);
+        _arrayListHandler = new ArrayListHandler(ElementsCount);
+    }
 
     [Benchmark]
     public void AddUndefinedCapacityList() =>
