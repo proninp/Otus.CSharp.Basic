@@ -1,11 +1,21 @@
-﻿using System.Text;
+﻿using HomeWork03.Infrastructure;
+using HomeWork03.Models;
+using HomeWork03.Services;
+using System.Text;
 
 namespace HomeWork03;
 public class QuadraticEquationFormatter
 {
-    public double A { get; set; }
-    public double B { get; set; }
-    public double C { get; set; }
+    public Coefficient A { get; set; }
+    public Coefficient B { get; set; }
+    public Coefficient C { get; set; }
+
+    public QuadraticEquationFormatter(Coefficient a, Coefficient b, Coefficient c)
+    {
+        A = a;
+        B = b;
+        C = c;
+    }
 
     public string Format()
     {
@@ -21,38 +31,37 @@ public class QuadraticEquationFormatter
 
     private void AddFirstArgument(StringBuilder sb)
     {
-        if (A == 0)
-            throw new ArgumentException("Параметр 'a' не может быть равен нулю в квадратном уравнении");
-        
-        if (Math.Abs(A) == 1)
-            sb.Append(A == -1 ? "-" : "");
+        if (A.UnsignedValue == "1")
+            sb.Append(A.Sign == "-" ? "-" : "");
         else
-            sb.Append(A).Append(" * ");
+            sb.Append(A.Value).Append(" * ");
         sb.Append("x^2");
     }
 
     private void AddSecondArgument(StringBuilder sb)
     {
-        if (B == 0)
+        if (B.BigNumber.HasValue && B.BigNumber.Value == 0)
             return;
         AddArgumentsSign(sb, B);
-        if (B != 1 && B != -1)
-            sb.Append(Math.Abs(B)).Append(" * ");
+        if (B.UnsignedValue != "1")
+            sb.Append(B.UnsignedValue).Append(" * ");
         sb.Append("x");
     }
 
     private void AddThirdArgument(StringBuilder sb)
     {
-        if (C == 0)
+        if (C.BigNumber.HasValue && C.BigNumber == 0)
             return;
         AddArgumentsSign(sb, C);
-        sb.Append(Math.Abs(C));
+        sb.Append(C.UnsignedValue);
     }
 
-    private void AddArgumentsSign(StringBuilder sb, double argument)
+    private void AddArgumentsSign(StringBuilder sb, Coefficient argument)
     {
-        var sign = (argument < 0) ? '-' : '+';
+        var sign = "+";
+        if (argument.IsNumber)
+            sign = argument.Sign;
         sb.Append(" ");
-        sb.Append(sign.ToString()).Append(" ");
+        sb.Append(sign).Append(" ");
     }
 }

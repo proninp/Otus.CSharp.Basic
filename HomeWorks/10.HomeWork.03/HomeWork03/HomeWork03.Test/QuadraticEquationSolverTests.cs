@@ -11,7 +11,7 @@ public class QuadraticEquationSolverTests
     public void SolveQuadraticEquation_TwoRealRoots(double a, double b, double c, double expectedRoot1, double expectedRoot2)
     {
         // Arrange
-        var solver = new QuadraticEquationFactory().GetSolver(a, b, c);
+        var solver = new QuadraticEquationSolver(a, b, c);
         
         // Act
         var actual = solver.Solve();
@@ -32,7 +32,7 @@ public class QuadraticEquationSolverTests
     public void SolveQuadraticEquation_OneRealRoot(double a, double b, double c, double expectedRoot)
     {
         // Arrange
-        var solver = new QuadraticEquationFactory().GetSolver(a, b, c);
+        var solver = new QuadraticEquationSolver(a, b, c);
 
         // Act
         var actual = solver.Solve();
@@ -52,7 +52,7 @@ public class QuadraticEquationSolverTests
     public void SolveQuadraticEquation_ComplexRoots(double a, double b, double c)
     {
         // Arrange
-        var solver = new QuadraticEquationFactory().GetSolver(a, b, c);
+        var solver = new QuadraticEquationSolver(a, b, c);
 
         // Act
         var actual = solver.Solve();
@@ -67,7 +67,7 @@ public class QuadraticEquationSolverTests
     {
         // Arrange
         double a = 0, b = 2, c = 1;
-        var solver = new QuadraticEquationFactory().GetSolver(a, b, c);
+        var solver = new QuadraticEquationSolver(a, b, c);
 
         // Act, Assert
         Assert.Throws<ArgumentException>(() => solver.Solve());

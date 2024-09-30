@@ -1,35 +1,35 @@
-﻿namespace HomeWork03;
+﻿using HomeWork03.Infrastructure;
+
+namespace HomeWork03;
 public class QuadraticEquationSolver
 {
-    private readonly double _a;
-    private readonly double _b;
-    private readonly double _c;
+    public double A { get; set; }
+    public double B { get; set; }
+    public double C { get; set; }
 
     public QuadraticEquationSolver(double a, double b, double c)
     {
-        _a = a;
-        _b = b;
-        _c = c;
+        A = a;
+        B = b;
+        C = c;
     }
 
     public (double? x1, double? x2) Solve()
     {
-        if (_a == 0)
-        {
-            throw new ArgumentException("Параметр 'a' не может быть равен нулю в квадратном уравнении");
-        }
+        if (A == 0)
+            throw new ArgumentException(Messages.Exceptions.IncorrectFirstArgument);
 
-        var discriminant = _b * _b - 4 * _a * _c;
+        var discriminant = B * B - 4 * A * C;
         double? x1 = null;
         double? x2 = null;
         if (discriminant > 0)
         {
-            x1 = (-_b + Math.Sqrt(discriminant)) / 2.0 / _a;
-            x2 = (-_b - Math.Sqrt(discriminant)) / 2.0 / _a;
+            x1 = (-B + Math.Sqrt(discriminant)) / 2.0 / A;
+            x2 = (-B - Math.Sqrt(discriminant)) / 2.0 / A;
         }
         else if (discriminant == 0)
         {
-            x1 = -_b / 2.0 / _a;
+            x1 = -B / 2.0 / A;
         }
         return (x1, x2);
     }

@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using HomeWork03.Services;
+using Xunit;
 
 namespace HomeWork03.Test;
 public class QuadraticEquationFormatterTests
@@ -18,12 +19,11 @@ public class QuadraticEquationFormatterTests
     public void FormatQuadraticEquation_ReturnsCorrectString(int a, int b, int c, string expected)
     {
         // Arrange
-        var formatter = new QuadraticEquationFormatter()
-        {
-            A = a,
-            B = b,
-            C = c
-        };
+        var aCoefficient = new CoefficientProvider(a.ToString()).GetCofficient();
+        var bCoefficient = new CoefficientProvider(b.ToString()).GetCofficient();
+        var cCoefficient = new CoefficientProvider(c.ToString()).GetCofficient();
+
+        var formatter = new QuadraticEquationFormatter(aCoefficient, bCoefficient, cCoefficient);
 
         // Act
         var actual = formatter.Format();
