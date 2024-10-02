@@ -3,22 +3,18 @@ using HomeWork03.Models;
 using System.Numerics;
 
 namespace HomeWork03.Services;
-public class CoefficientProvider : ICoefficientable
+public sealed class CoefficientProvider : ICoefficientable
 {
-    public string Value { get; set; }
+    private string _value = string.Empty;
 
-    public CoefficientProvider(string value)
+    public Coefficient GetCofficient(string value)
     {
-        Value = value;
-    }
-
-    public Coefficient GetCofficient()
-    {
+        _value = value;
         var bigNumber = AsBigInteger();
         var number = AsInt();
         return new Coefficient
         {
-            Value = Value,
+            Value = _value,
             BigNumber = bigNumber,
             Number = number,
             Sign = GetSign(bigNumber is not null),
@@ -29,7 +25,7 @@ public class CoefficientProvider : ICoefficientable
     private BigInteger? AsBigInteger()
     {
         BigInteger? result = null;
-        if (BigInteger.TryParse(Value, out BigInteger bigValue))
+        if (BigInteger.TryParse(_value, out BigInteger bigValue))
             result = bigValue;
         return result;
     }
@@ -37,16 +33,16 @@ public class CoefficientProvider : ICoefficientable
     private int? AsInt()
     {
         int? result = null;
-        if (int.TryParse(Value, out int intValue))
+        if (int.TryParse(_value, out int intValue))
             result = intValue;
         return result;
     }
 
     private string GetSign(bool isNumber)
     {
-        if (string.IsNullOrEmpty(Value) || !isNumber)
+        if (string.IsNullOrEmpty(_value) || !isNumber)
             return string.Empty;
-        var first = Value.First().ToString();
+        var first = _value.First().ToString();
         if (first == "-")
             return "-";
         return "+";
@@ -54,14 +50,14 @@ public class CoefficientProvider : ICoefficientable
 
     private string GetUnsigned(bool isNumber)
     {
-        if (string.IsNullOrEmpty(Value))
+        if (string.IsNullOrEmpty(_value))
             return string.Empty;
         if (!isNumber)
-            return Value;
-        var first = Value.First().ToString();
+            return _value;
+        var first = _value.First().ToString();
         if (first == "-" || first == "+")
-            return Value.Substring(1);
-        return Value;
+            return _value.Substring(1);
+        return _value;
     }
 
 

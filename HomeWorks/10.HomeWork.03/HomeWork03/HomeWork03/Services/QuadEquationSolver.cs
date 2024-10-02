@@ -1,13 +1,13 @@
 ﻿using HomeWork03.Infrastructure;
 
-namespace HomeWork03;
-public class QuadraticEquationSolver
+namespace HomeWork03.Services;
+public sealed class QuadEquationSolver
 {
     public double A { get; set; }
     public double B { get; set; }
     public double C { get; set; }
 
-    public QuadraticEquationSolver(double a, double b, double c)
+    public QuadEquationSolver(double a, double b, double c)
     {
         A = a;
         B = b;

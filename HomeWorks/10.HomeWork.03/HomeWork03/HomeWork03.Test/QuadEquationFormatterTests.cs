@@ -1,8 +1,9 @@
-﻿using HomeWork03.Services;
+﻿using HomeWork03.Models;
+using HomeWork03.Services;
 using Xunit;
 
 namespace HomeWork03.Test;
-public class QuadraticEquationFormatterTests
+public class QuadEquationFormatterTests
 {
     [Theory]
     [InlineData(5, -2, 3, "5 * x^2 - 2 * x + 3 = 0")]
@@ -19,14 +20,15 @@ public class QuadraticEquationFormatterTests
     public void FormatQuadraticEquation_ReturnsCorrectString(int a, int b, int c, string expected)
     {
         // Arrange
-        var aCoefficient = new CoefficientProvider(a.ToString()).GetCofficient();
-        var bCoefficient = new CoefficientProvider(b.ToString()).GetCofficient();
-        var cCoefficient = new CoefficientProvider(c.ToString()).GetCofficient();
-
-        var formatter = new QuadraticEquationFormatter(aCoefficient, bCoefficient, cCoefficient);
+        var coefficientProvider = new CoefficientProvider();
+        var aCoefficient = coefficientProvider.GetCofficient(a.ToString());
+        var bCoefficient = coefficientProvider.GetCofficient(b.ToString());
+        var cCoefficient = coefficientProvider.GetCofficient(c.ToString());
+        var equation = new QuadEquation(aCoefficient, bCoefficient, cCoefficient);
+        var formatter = new QuadEquationFormatter();
 
         // Act
-        var actual = formatter.Format();
+        var actual = formatter.Format(equation);
 
 
         // Assert
