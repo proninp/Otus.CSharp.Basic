@@ -11,11 +11,11 @@ public sealed class QuadEquationPrinter : IEquationPrinter
         _consoleHelper = consoleHelper;
     }
 
-    public void PrintEquationInput(OutputManager manager)
+    public void PrintEquationInput(OutputManager outputManager)
     {
-        _consoleHelper.PrintColoredLine(manager.EquationLine.Text, manager.EquationLine.Position, manager.EquationLine.Color);
+        _consoleHelper.PrintColoredLine(outputManager.EquationLine.Text, outputManager.EquationLine.Position, outputManager.EquationLine.Color);
 
-        foreach (var line in manager.Lines)
+        foreach (var line in outputManager.Lines)
         {
             var lineText = new StringBuilder();
             lineText.Append(line.IsSelected ? "> " : "  ");

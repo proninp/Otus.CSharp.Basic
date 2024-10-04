@@ -5,18 +5,18 @@ namespace HomeWork03.Services;
 public sealed class AppService
 {
     private readonly ConsoleHelper _consoleHelper;
-    private readonly OutputManager _manager;
+    private readonly OutputManager _outputManager;
     private readonly IEquationPrinter _printer;
     private readonly IExceptionHandler _exceptionHandler;
 
     public AppService(
         ConsoleHelper consoleHelper,
-        OutputManager manager,
+        OutputManager outputManager,
         IEquationPrinter printer,
         IExceptionHandler exceptionHandler)
     {
         _consoleHelper = consoleHelper;
-        _manager = manager;
+        _outputManager = outputManager;
         _exceptionHandler = exceptionHandler;
         _printer = printer;
     }
@@ -25,8 +25,8 @@ public sealed class AppService
     {
         _consoleHelper.PrintConsoleSpecial(Messages.Instructions.GetIntroductions);
 
-        _manager.Create();
-        _printer.PrintEquationInput(_manager);
+        _outputManager.Create();
+        _printer.PrintEquationInput(_outputManager);
 
         var isWorking = true;
         while (isWorking)
@@ -41,13 +41,13 @@ public sealed class AppService
         switch (key.Key)
         {
             case ConsoleKey.DownArrow:
-                _manager.SelectionIndex++;
+                _outputManager.SelectionIndex++;
                 break;
             case ConsoleKey.UpArrow:
-                _manager.SelectionIndex--;
+                _outputManager.SelectionIndex--;
                 break;
             case ConsoleKey.Backspace:
-                _manager.Del();
+                _outputManager.Del();
                 break;
             case ConsoleKey.Enter:
                 ProcessEnterKey();
@@ -58,7 +58,7 @@ public sealed class AppService
                 ProcessDefaultKey(key.KeyChar);
                 break;
         }
-        _printer.PrintEquationInput(_manager);
+        _printer.PrintEquationInput(_outputManager);
         return true;
     }
 
@@ -66,18 +66,18 @@ public sealed class AppService
     {
         try
         {
-            var result = _manager.Solve();
-            _printer.PrintEquationOutput(_manager.BottomPosition, result.x1, result.x2);
+            var result = _outputManager.Solve();
+            _printer.PrintEquationOutput(_outputManager.BottomPosition, result.x1, result.x2);
         }
         catch (Exception ex)
         {
-            _exceptionHandler.Handle(ex, _manager);
+            _exceptionHandler.Handle(ex, _outputManager);
         }
     }
 
     private void ProcessDefaultKey(char keyChar)
     {
         if (!char.IsControl(keyChar))
-            _manager.Add(keyChar);
+            _outputManager.Add(keyChar);
     }
 }

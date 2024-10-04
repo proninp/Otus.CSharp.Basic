@@ -15,11 +15,11 @@ public sealed class ExceptionHandler : IExceptionHandler
         _consoleHelper = consoleHelper;
     }
 
-    public void Handle(Exception ex, OutputManager manager)
+    public void Handle(Exception ex, OutputManager outputManager)
     {
         var errorMessage = GetFormatedData(ex);
         var color = GetConsoleColor(ex);
-        _consoleHelper.PrintLineWithBackGround(errorMessage, manager.BottomPosition, color);
+        _consoleHelper.PrintLineWithBackGround(errorMessage, outputManager.BottomPosition, color);
     }
 
     public void CollectExceptionData<T>(Exception ex, params T[] coefficients)

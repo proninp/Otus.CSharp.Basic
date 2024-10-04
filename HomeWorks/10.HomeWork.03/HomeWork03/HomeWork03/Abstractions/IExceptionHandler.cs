@@ -4,7 +4,7 @@ using HomeWork03.Services;
 namespace HomeWork03.Abstractions;
 public interface IExceptionHandler
 {
-    public void Handle(Exception ex, OutputManager manager);
+    public void Handle(Exception ex, OutputManager outputManager);
 
     public void CollectExceptionData<T>(Exception ex, params T[] coefficients);
 
