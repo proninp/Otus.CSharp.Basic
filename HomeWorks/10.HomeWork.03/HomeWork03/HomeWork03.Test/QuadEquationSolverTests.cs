@@ -1,4 +1,5 @@
-﻿using HomeWork03.Services;
+﻿using HomeWork03.Exceptions;
+using HomeWork03.Services;
 using Xunit;
 
 namespace HomeWork03.Test;
@@ -9,13 +10,13 @@ public class QuadEquationSolverTests
     [InlineData(1, -5, 6, 3, 2)]
     [InlineData(2, -5, 3, 1.5, 1)]
     [InlineData(1, 0, -4, 2, -2)]
-    public void SolveQuadraticEquation_TwoRealRoots(double a, double b, double c, double expectedRoot1, double expectedRoot2)
+    public void SolveQuadraticEquation_TwoRealRoots(int a, int b, int c, double expectedRoot1, double expectedRoot2)
     {
         // Arrange
-        var solver = new QuadEquationSolver(a, b, c);
+        var solver = GetSolver();
         
         // Act
-        var actual = solver.Solve();
+        var actual = solver.Solve(a, b, c);
 
         // Assert
         Assert.True(actual.x1.HasValue, "Нет корня x1.");
@@ -30,13 +31,13 @@ public class QuadEquationSolverTests
     [InlineData(4, 4, 1, -0.5)]
     [InlineData(9, -12, 4, 2.0 / 3)]
     [InlineData(1, 6, 9, -3)]
-    public void SolveQuadraticEquation_OneRealRoot(double a, double b, double c, double expectedRoot)
+    public void SolveQuadraticEquation_OneRealRoot(int a, int b, int c, double expectedRoot)
     {
         // Arrange
-        var solver = new QuadEquationSolver(a, b, c);
+        var solver = GetSolver();
 
         // Act
-        var actual = solver.Solve();
+        var actual = solver.Solve(a, b, c);
 
         // Assert
         Assert.True(actual.x1.HasValue, "Нет корня x1.");
@@ -50,27 +51,30 @@ public class QuadEquationSolverTests
     [InlineData(3, 4, 2)]
     [InlineData(1, 1, 1)]
     [InlineData(5, 6, 9)]
-    public void SolveQuadraticEquation_ComplexRoots(double a, double b, double c)
+    public void SolveQuadraticEquation_ComplexRoots(int a, int b, int c)
     {
         // Arrange
-        var solver = new QuadEquationSolver(a, b, c);
-
-        // Act
-        var actual = solver.Solve();
+        var solver = GetSolver();
 
         // Assert
-        Assert.False(actual.x1.HasValue);
-        Assert.False(actual.x2.HasValue);
+        Assert.Throws<NoRealValuesException>(() => solver.Solve(a, b, c));
     }
 
     [Fact]
     public void Solve_WithZeroCoefficientA_ThrowsArgumentException()
     {
         // Arrange
-        double a = 0, b = 2, c = 1;
-        var solver = new QuadEquationSolver(a, b, c);
+        int a = 0, b = 2, c = 1;
+        var solver = GetSolver();
 
         // Act, Assert
-        Assert.Throws<ArgumentException>(() => solver.Solve());
+        Assert.Throws<ArgumentException>(() => solver.Solve(a, b, c));
+    }
+
+    private QuadEquationSolver GetSolver()
+    {
+        var consoleHelper = new ConsoleHelper();
+        var exHandler = new ExceptionHandler(consoleHelper);
+        return new QuadEquationSolver(exHandler);
     }
 }

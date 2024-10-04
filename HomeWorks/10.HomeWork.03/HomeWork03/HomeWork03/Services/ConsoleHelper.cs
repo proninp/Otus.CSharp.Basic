@@ -1,8 +1,11 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace HomeWork03.Services;
-public class ConsoleHelper
+﻿namespace HomeWork03.Services;
+public sealed class ConsoleHelper
 {
+    public ConsoleHelper()
+    {
+        Console.CursorVisible = false;
+    }
+
     public int Position { get => Console.CursorTop; }
 
     public void ClearCurrentLine(int lineTopPosition)
@@ -17,7 +20,7 @@ public class ConsoleHelper
         int originalLeft = Console.CursorLeft;
         int originalTop = Console.CursorTop;
 
-        for (int i = belowLineTop + 1; i < Console.WindowHeight; i++)
+        for (int i = belowLineTop; i < Console.WindowHeight; i++)
         {
             Console.SetCursorPosition(0, i);
             Console.Write(new string(' ', Console.WindowWidth));
@@ -31,26 +34,20 @@ public class ConsoleHelper
     public void SetToPosition(int topPosition) =>
         Console.SetCursorPosition(0, topPosition);
 
-    public void PrintLine(string text) =>
-        PrintLine(text, Console.CursorTop);
-
-    public void PrintLine(string text, int lineTopPosition)
+    public void PrintColoredLine(string text, int lineTopPosition, ConsoleColor color)
     {
+        var position = Position;
         ClearCurrentLine(lineTopPosition);
-        Console.WriteLine(text);
+        ColoredPrint(text, color);
+        Console.CursorTop = position;
     }
 
     public void PrintConsoleSpecial(string text)
     {
-        PrintConsole(text, ConsoleColor.Magenta);
+        ColoredPrint(text, ConsoleColor.Magenta);
     }
 
-    public void PrintConsoleError(string text)
-    {
-        PrintConsole(text, ConsoleColor.Red);
-    }
-
-    public void PrintConsole(string text, ConsoleColor color)
+    public void ColoredPrint(string text, ConsoleColor color)
     {
         var currentColor = Console.ForegroundColor;
         Console.ForegroundColor = color;
@@ -58,10 +55,14 @@ public class ConsoleHelper
         Console.ForegroundColor = currentColor;
     }
 
-    public void PrintConsoleWithBackGround(ConsoleColor color, string message)
+    public void PrintLineWithBackGround(string text, int lineTopPosition, ConsoleColor color)
     {
+        var position = Position;
+        SetToPosition(lineTopPosition);
+        ClearBelow(lineTopPosition);
         Console.BackgroundColor = color;
-        Console.WriteLine(message);
+        Console.WriteLine(text);
         Console.ResetColor();
+        SetToPosition(position);
     }
 }

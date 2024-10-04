@@ -1,5 +1,6 @@
 ﻿using HomeWork03.Abstractions;
 using HomeWork03.Models;
+using HomeWork03.Models.Enums;
 using System.Numerics;
 
 namespace HomeWork03.Services;
@@ -7,13 +8,17 @@ public sealed class CoefficientProvider : ICoefficientable
 {
     private string _value = string.Empty;
 
-    public Coefficient GetCofficient(string value)
+    public Coefficient GetCofficient(CoefficientOrder order) =>
+        GetCofficient(order, order.GetDescription());
+
+    public Coefficient GetCofficient(CoefficientOrder order, string value)
     {
         _value = value;
-        var bigNumber = AsBigInteger();
-        var number = AsInt();
+        var bigNumber = AsBigNumber();
+        var number = AsNumber();
         return new Coefficient
         {
+            Order = order,
             Value = _value,
             BigNumber = bigNumber,
             Number = number,
@@ -22,7 +27,7 @@ public sealed class CoefficientProvider : ICoefficientable
         };
     }
 
-    private BigInteger? AsBigInteger()
+    private BigInteger? AsBigNumber()
     {
         BigInteger? result = null;
         if (BigInteger.TryParse(_value, out BigInteger bigValue))
@@ -30,11 +35,11 @@ public sealed class CoefficientProvider : ICoefficientable
         return result;
     }
 
-    private int? AsInt()
+    private int? AsNumber()
     {
         int? result = null;
-        if (int.TryParse(_value, out int intValue))
-            result = intValue;
+        if (int.TryParse(_value, out int doubleValue))
+            result = doubleValue;
         return result;
     }
 
@@ -59,6 +64,4 @@ public sealed class CoefficientProvider : ICoefficientable
             return _value.Substring(1);
         return _value;
     }
-
-
 }

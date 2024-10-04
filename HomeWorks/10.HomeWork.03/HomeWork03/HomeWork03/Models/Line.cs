@@ -1,20 +1,26 @@
 ﻿using System.Text;
 
 namespace HomeWork03.Models;
-public class Line
+public sealed class Line
 {
     private readonly StringBuilder _content;
+    private readonly ConsoleColor _defaultColor = ConsoleColor.White;
+    private bool _isSelected;
 
     public Line(string lineText, int position)
     {
         _content = new StringBuilder(lineText);
         Position = position;
-        Color = Console.ForegroundColor;
-        IsReprint = true;
+    }
+
+    public Line(string lineText, int position, ConsoleColor color) : this(lineText, position)
+    {
+        Color = color;
     }
 
     public Line(string prefix, bool isSelected, int position) : this(string.Empty, position)
     {
+        Color = _defaultColor;
         Prefix = prefix;
         IsSelected = isSelected;
     }
@@ -22,8 +28,6 @@ public class Line
     public string Prefix { get; init; } = string.Empty;
 
     public int Position { get; init; }
-
-    public bool IsReprint { get; protected set; }
 
     public string Text
     {
@@ -34,50 +38,31 @@ public class Line
             {
                 _content.Clear();
                 _content.Append(value);
-                IsReprint = true;
             }
         }
     }
 
-    public ConsoleColor Color
-    {
-        get => Color;
-        set
-        {
-            if (Color != value)
-            {
-                Color = value;
-                IsReprint = true;
-            }
-        }
-    }
+    public ConsoleColor Color { get; set; }
 
     public bool IsSelected
     {
-        get => IsSelected;
+        get => _isSelected;
         set
         {
-            if (IsSelected != value)
+            if (_isSelected != value)
             {
-                IsSelected = value;
-                Color = IsSelected ? ConsoleColor.Green : Console.ForegroundColor;
-                IsReprint = true;
+                _isSelected = value;
+                Color = IsSelected ? ConsoleColor.Green : _defaultColor;
             }
         }
     }
 
-    public void Add(char ch)
-    {
+    public void Add(char ch) =>
         _content.Append(ch);
-        IsReprint = true;
-    }
 
-    public void Backspace()
+    public void Del()
     {
         if (_content.Length > 0)
-        {
             _content.Length--;
-            IsReprint = true;
-        }
     }
 }

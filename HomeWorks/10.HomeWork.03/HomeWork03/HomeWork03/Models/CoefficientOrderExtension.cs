@@ -2,7 +2,7 @@
 using System.Reflection;
 
 namespace HomeWork03.Models;
-public static class CoeficcientOrderExtension
+public static class CoefficientOrderExtension
 {
     public static string GetDescription(this Enum value)
     {

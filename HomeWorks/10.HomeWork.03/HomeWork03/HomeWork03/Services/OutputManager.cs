@@ -1,24 +1,35 @@
-﻿using HomeWork03.Models;
-using System.Text;
+﻿using HomeWork03.Abstractions;
+using HomeWork03.Models;
+using HomeWork03.Models.Enums;
 
 namespace HomeWork03.Services;
-public class OutputManager
+public sealed class OutputManager
 {
-    private QuadEquationProvider _equationProvider;
-    private QuadEquationFormatter _formatter;
-    private ConsoleHelper _consoleHelper;
+    private readonly ICoefficientable _coefficientProvider;
+    private readonly IEquationSolver _solver;
+    private readonly IEquationFormatter _formatter;
+    private readonly IEquationValidator _equationValidator;
+    private readonly CoefficientOrder[] _orders;
+    private readonly ConsoleHelper _consoleHelper;
     private int _selectionIndex = 0;
+    private Coefficient[] _coefficients = new Coefficient[3];
 
-    public OutputManager(QuadEquationProvider equationProvider, QuadEquationFormatter formatter, ConsoleHelper consoleHelper)
+    public OutputManager(
+        ConsoleHelper consoleHelper,
+        IEquationSolver solver,
+        IEquationFormatter formatter,
+        ICoefficientable coefficientProvider,
+        IEquationValidator equationValidator)
     {
-        _equationProvider = equationProvider;
+        _solver = solver;
+        _coefficientProvider = coefficientProvider;
         _consoleHelper = consoleHelper;
         _formatter = formatter;
-        Equation = _equationProvider.GetNewEquation();
-        Create();
+        _equationValidator = equationValidator;
+        _orders = [CoefficientOrder.First, CoefficientOrder.Second, CoefficientOrder.Third];
     }
 
-    public QuadEquation Equation { get; set; }
+    public int BottomPosition { get; private set; }
 
     public Line EquationLine { get; set; }
 
@@ -40,34 +51,48 @@ public class OutputManager
         }
     }
 
-    private void Create()
+    public void Create()
     {
-        _consoleHelper.NewLine();
-        EquationLine = new Line(_formatter.Format(Equation), _consoleHelper.Position);
+        for (int i = 0; i < _coefficients.Length; i++)
+            _coefficients[i] = _coefficientProvider.GetCofficient(_orders[i]);
 
-        var i = 0;
-        Lines[i++] = CreateLine(Equation.A.Order.GetDescription(), true);
-        Lines[i++] = CreateLine(Equation.B.Order.GetDescription(), false);
-        Lines[i++] = CreateLine(Equation.C.Order.GetDescription(), false);
-        _consoleHelper.SetToPosition(EquationLine.Position);
+        EquationLine = new Line(_formatter.Format(_coefficients), _consoleHelper.Position, ConsoleColor.Blue);
+
+        for (int i = 0; i < Lines.Length; i++)
+            Lines[i] = CreateLine(_coefficients[i].Value, i == 0);
+
+        _consoleHelper.NewLine();
+        BottomPosition = _consoleHelper.Position;
+    }
+
+    public void Add(char c)
+    {
+        Lines[SelectionIndex].Add(c);
+        UpdateEquationData();
+    }
+
+    public void Del()
+    {
+        Lines[SelectionIndex].Del();
+        UpdateEquationData();
+    }
+
+    public (double? x1, double? x2) Solve()
+    {
+        var coefficientValues = _equationValidator.Validate(_coefficients);
+        return _solver.Solve(coefficientValues[0], coefficientValues[1], coefficientValues[2]);
     }
 
     private Line CreateLine(string prefix, bool isSelected)
     {
         _consoleHelper.NewLine();
-        return new Line(prefix, isSelected, _consoleHelper.Position);
+        var line = new Line(prefix, isSelected, _consoleHelper.Position);
+        return line;
     }
 
-    public string GetFullOutputAsText()
+    private void UpdateEquationData()
     {
-        if (Equation is null)
-            return string.Empty;
-        
-        var output = new StringBuilder();
-        output.Append(EquationLine.Text).Append(Environment.NewLine);
-        foreach (var line in Lines)
-            output.Append(line).Append(Environment.NewLine);
-
-        return output.ToString().TrimEnd(Environment.NewLine.ToCharArray());
+        _coefficients[SelectionIndex] = _coefficientProvider.GetCofficient(_orders[SelectionIndex], Lines[SelectionIndex].Text);
+        EquationLine.Text = _formatter.Format(_coefficients);
     }
 }

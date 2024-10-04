@@ -1,53 +1,52 @@
-﻿using HomeWork03.Models;
+﻿using HomeWork03.Abstractions;
+using HomeWork03.Models;
 using System.Text;
 
 namespace HomeWork03.Services;
-public sealed class QuadEquationFormatter
+public sealed class QuadEquationFormatter : IEquationFormatter
 {
-
-    public string Format(QuadEquation equation)
+    public string Format(Coefficient[] equation)
     {
-
         var equationSb = new StringBuilder();
-        AddFirstArgument(equationSb, equation);
-        AddSecondArgument(equationSb, equation);
-        AddThirdArgument(equationSb, equation);
+        AddFirstArgument(equationSb, equation[0]);
+        AddSecondArgument(equationSb, equation[1]);
+        AddThirdArgument(equationSb, equation[2]);
         equationSb.Append(" = 0");
 
         return equationSb.ToString();
     }
 
-    private void AddFirstArgument(StringBuilder sb, QuadEquation equation)
+    private void AddFirstArgument(StringBuilder sb, Coefficient coefficient)
     {
-        if (equation.A.UnsignedValue == "1")
-            sb.Append(equation.A.Sign == "-" ? "-" : "");
-        else
-            sb.Append(equation.A.Value).Append(" * ");
+        if (coefficient.Sign == "-")
+            sb.Append(coefficient.Sign);
+        if (!string.IsNullOrEmpty(coefficient.Value) && coefficient.UnsignedValue != "1")
+            sb.Append(coefficient.UnsignedValue).Append(" * ");
         sb.Append("x^2");
     }
 
-    private void AddSecondArgument(StringBuilder sb, QuadEquation equation)
+    private void AddSecondArgument(StringBuilder sb, Coefficient coefficient)
     {
-        if (equation.B.BigNumber.HasValue && equation.B.BigNumber.Value == 0)
+        if (coefficient.BigNumber.HasValue && coefficient.BigNumber.Value == 0)
             return;
-        AddArgumentsSign(sb, equation.B);
-        if (equation.B.UnsignedValue != "1")
-            sb.Append(equation.B.UnsignedValue).Append(" * ");
+        AddArgumentsSign(sb, coefficient);
+        if (!string.IsNullOrEmpty(coefficient.UnsignedValue) && coefficient.UnsignedValue != "1")
+            sb.Append(coefficient.UnsignedValue).Append(" * ");
         sb.Append("x");
     }
 
-    private void AddThirdArgument(StringBuilder sb, QuadEquation equation)
+    private void AddThirdArgument(StringBuilder sb, Coefficient coefficient)
     {
-        if (equation.C.BigNumber.HasValue && equation.C.BigNumber == 0)
+        if (string.IsNullOrEmpty(coefficient.UnsignedValue) || (coefficient.BigNumber.HasValue && coefficient.BigNumber == 0))
             return;
-        AddArgumentsSign(sb, equation.C);
-        sb.Append(equation.C.UnsignedValue);
+        AddArgumentsSign(sb, coefficient);
+        sb.Append(coefficient.UnsignedValue);
     }
 
     private void AddArgumentsSign(StringBuilder sb, Coefficient argument)
     {
         var sign = "+";
-        if (argument.IsNumber)
+        if (argument.IsBigNumber)
             sign = argument.Sign;
         sb.Append(" ");
         sb.Append(sign).Append(" ");

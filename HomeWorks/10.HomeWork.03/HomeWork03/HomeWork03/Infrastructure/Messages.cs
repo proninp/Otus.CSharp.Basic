@@ -13,7 +13,8 @@ public static class Messages
     public static class Exceptions
     {
         public const string IncorrectFirstArgument = "Параметр 'a' не может быть равен нулю в квадратном уравнении";
-        public const string IncorrectParameterText = "Неверный формат параметра {0}:";
+        public const string IncorrectParameterText = "Неверный формат параметра {0}";
+        public const string ParameterNotSpecifiedText = "Параметр не указан";
         public const string AvailableInputRangeText = "Допустимый диапазон значений от {0} до {1}";
         public const string NoRealValuesText = "Вещественных значений не найдено";
     }

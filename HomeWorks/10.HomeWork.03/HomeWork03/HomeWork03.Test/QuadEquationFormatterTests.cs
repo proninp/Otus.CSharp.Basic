@@ -1,4 +1,5 @@
 ﻿using HomeWork03.Models;
+using HomeWork03.Models.Enums;
 using HomeWork03.Services;
 using Xunit;
 
@@ -21,14 +22,14 @@ public class QuadEquationFormatterTests
     {
         // Arrange
         var coefficientProvider = new CoefficientProvider();
-        var aCoefficient = coefficientProvider.GetCofficient(a.ToString());
-        var bCoefficient = coefficientProvider.GetCofficient(b.ToString());
-        var cCoefficient = coefficientProvider.GetCofficient(c.ToString());
-        var equation = new QuadEquation(aCoefficient, bCoefficient, cCoefficient);
+        var coefficients = new Coefficient[3];
+        coefficients[0] = coefficientProvider.GetCofficient(CoefficientOrder.First, a.ToString());
+        coefficients[1] = coefficientProvider.GetCofficient(CoefficientOrder.Second, b.ToString());
+        coefficients[2] = coefficientProvider.GetCofficient(CoefficientOrder.Third, c.ToString());
         var formatter = new QuadEquationFormatter();
 
         // Act
-        var actual = formatter.Format(equation);
+        var actual = formatter.Format(coefficients);
 
 
         // Assert

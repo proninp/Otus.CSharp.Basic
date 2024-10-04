@@ -1,35 +1,43 @@
-﻿using HomeWork03.Infrastructure;
+﻿using HomeWork03.Abstractions;
+using HomeWork03.Exceptions;
+using HomeWork03.Infrastructure;
 
 namespace HomeWork03.Services;
-public sealed class QuadEquationSolver
+public sealed class QuadEquationSolver : IEquationSolver
 {
-    public double A { get; set; }
-    public double B { get; set; }
-    public double C { get; set; }
+    private IExceptionHandler _exceptionHandler;
 
-    public QuadEquationSolver(double a, double b, double c)
+    public QuadEquationSolver(IExceptionHandler exceptionHandler)
     {
-        A = a;
-        B = b;
-        C = c;
+        _exceptionHandler = exceptionHandler;
     }
 
-    public (double? x1, double? x2) Solve()
+    public (double? x1, double? x2) Solve(int a, int b, int c)
     {
-        if (A == 0)
-            throw new ArgumentException(Messages.Exceptions.IncorrectFirstArgument);
+        if (a == 0)
+        {
+            var ex = new ArgumentException(Messages.Exceptions.IncorrectFirstArgument);
+            _exceptionHandler.CollectExceptionData(ex, a, b, c);
+            throw ex;
+        }
 
-        var discriminant = B * B - 4 * A * C;
+        var discriminant = b * b - 4 * a * c;
         double? x1 = null;
         double? x2 = null;
         if (discriminant > 0)
         {
-            x1 = (-B + Math.Sqrt(discriminant)) / 2.0 / A;
-            x2 = (-B - Math.Sqrt(discriminant)) / 2.0 / A;
+            x1 = (-b + Math.Sqrt(discriminant)) / 2.0 / a;
+            x2 = (-b - Math.Sqrt(discriminant)) / 2.0 / a;
         }
         else if (discriminant == 0)
         {
-            x1 = -B / 2.0 / A;
+            x1 = -b / 2.0 / a;
+        }
+        else
+        {
+            var ex = new NoRealValuesException(Messages.Exceptions.NoRealValuesText);
+            _exceptionHandler.CollectExceptionData(ex, a, b, c);
+            throw ex;
         }
         return (x1, x2);
     }
