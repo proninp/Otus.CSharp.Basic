@@ -1,11 +1,6 @@
 ﻿namespace HomeWork03.Services;
 public sealed class ConsoleHelper
 {
-    public ConsoleHelper()
-    {
-        Console.CursorVisible = false;
-    }
-
     public int Position { get => Console.CursorTop; }
 
     public void ClearCurrentLine(int lineTopPosition)
@@ -27,6 +22,9 @@ public sealed class ConsoleHelper
         }
         Console.SetCursorPosition(originalLeft, originalTop);
     }
+
+    public void DisableCursor() =>
+        Console.CursorVisible = false;
 
     public void NewLine() =>
         Console.WriteLine();

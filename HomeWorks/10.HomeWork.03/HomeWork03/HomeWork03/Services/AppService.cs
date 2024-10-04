@@ -23,6 +23,7 @@ public sealed class AppService
 
     public void Run()
     {
+        _consoleHelper.DisableCursor();
         _consoleHelper.PrintConsoleSpecial(Messages.Instructions.GetIntroductions);
 
         _outputManager.Create();
