@@ -85,3 +85,31 @@ var s =Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stac
 * 2 балла - выполнено доп. задание 3
 
 Для зачета достаточно сделать основное задание
+
+
+## Резкльтаты тестирования
+
+```
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.4.5+1caef2f33e (64-bit .NET 8.0.1)
+[xUnit.net 00:00:00.36]   Discovering: HomeWork04.Tests
+[xUnit.net 00:00:00.38]   Discovered:  HomeWork04.Tests
+[xUnit.net 00:00:00.39]   Starting:    HomeWork04.Tests
+```
+
+* Пройден [HomeWork04.Tests.OutusStackTests.ConcatThreeStacksReturnsCombinedStack](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L117) [3 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.SizeShouldReturnCorrectNumberOfEmptyStack](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L76) [1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.PopShouldReturnTopItemAndDecreaseSize](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L35) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.PopAllElementsReturnsNullForTopWhenStackIsEmpty](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L61) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.PopShouldThrowExceptionWhenStackIsEmpty](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L50) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.ConcatShouldCombineStacks](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L102) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.ConstructorShouldInitializeStackWithGivenItems](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L6) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.MergeShouldRetainOrderWhenMergingStacks](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L142) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.SizeShouldReturnCorrectNumberOfItems](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L88) [< 1 ms]
+* Пройден [HomeWork04.Tests.OutusStackTests.AddShouldIncreaseSizeAndSetTop](HomeWork04/HomeWork04.Tests/OutusStackTests.cs#L20) [< 1 ms]
+
+```
+Тестовый запуск выполнен.
+Всего тестов: 10
+     Пройдено: 10
+ Общее время: 1,0349 Секунды
+```
