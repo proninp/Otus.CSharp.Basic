@@ -1,7 +1,7 @@
 ﻿namespace HomeWork04;
 public class OtusSatck<T> : IStackable<T>
 {
-    private StackItem<T>? _item;
+    private StackItem<T>? _stackItem;
 
     public OtusSatck(params T[] items)
     {
@@ -10,7 +10,7 @@ public class OtusSatck<T> : IStackable<T>
 
     public int Size { get; private set; }
 
-    public T? Top { get => _item is null ? default : _item.Item; }
+    public T? Top { get => _stackItem is null ? default : _stackItem.Item; }
 
     public static OtusSatck<T> Concat(params OtusSatck<T>[] stacks)
     {
@@ -25,7 +25,7 @@ public class OtusSatck<T> : IStackable<T>
 
     public void Add(T item)
     {
-        _item = new StackItem<T>(_item, item);
+        _stackItem = new StackItem<T>(_stackItem, item);
         ++Size;
     }
 
@@ -33,8 +33,8 @@ public class OtusSatck<T> : IStackable<T>
     {
         if (Size == 0)
             throw new InvalidOperationException("Стек пустой");
-        var item = _item!.Item;
-        _item = _item.Previous;
+        var item = _stackItem!.Item;
+        _stackItem = _stackItem.Previous;
         --Size;
         return item;
     }
