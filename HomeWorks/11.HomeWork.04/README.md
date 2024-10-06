@@ -87,7 +87,7 @@ var s =Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stac
 Для зачета достаточно сделать основное задание
 
 
-## Резкльтаты тестирования
+## Результаты тестирования
 
 ```
 [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.4.5+1caef2f33e (64-bit .NET 8.0.1)
