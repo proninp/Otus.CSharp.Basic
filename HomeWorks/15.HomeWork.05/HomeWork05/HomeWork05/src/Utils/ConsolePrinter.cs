@@ -1,7 +1,7 @@
 ﻿using HomeWork05.src.Abstractions;
 
 namespace HomeWork05.src.Utils;
-public class ConsolePrinter : IPrinter
+public class ConsolePrinter : IPrintable
 {
     public void PrintTitle(string title)
     {

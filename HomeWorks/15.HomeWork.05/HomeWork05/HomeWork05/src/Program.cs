@@ -6,11 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 var serviceCollection = new ServiceCollection();
 
 serviceCollection
-    .AddSingleton<ApplicationService>()
-    .AddSingleton<IPrinter, ConsolePrinter>()
+    .AddSingleton<Application>()
+    .AddSingleton<IPrintable, ConsolePrinter>()
     .AddTransient<Quadcopter>();
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
-var app = serviceProvider.GetRequiredService<ApplicationService>();
+var app = serviceProvider.GetRequiredService<Application>();
 app.Run();

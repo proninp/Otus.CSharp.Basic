@@ -1,7 +1,7 @@
 ﻿using HomeWork05.src.Abstractions;
 
 namespace HomeWork05.src;
-public class ApplicationService(IPrinter printer, Quadcopter copter)
+public class Application(IPrintable printer, Quadcopter copter)
 {
     public void Run()
     {

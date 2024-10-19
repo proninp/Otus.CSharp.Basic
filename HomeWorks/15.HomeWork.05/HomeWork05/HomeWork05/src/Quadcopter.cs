@@ -1,7 +1,7 @@
 ﻿using HomeWork05.src.Abstractions;
 
 namespace HomeWork05.src;
-public class Quadcopter(IPrinter printer) : IFlyingRobot<string>, IChargeable
+public class Quadcopter(IPrintable printer) : IFlyingRobot<string>, IChargeable
 {
     private List<string> components = ["rotor1", "rotor2", "rotor3", "rotor4"];
 
@@ -23,6 +23,4 @@ public class Quadcopter(IPrinter printer) : IFlyingRobot<string>, IChargeable
 
     string IRobot<string>.GetInfo() =>
         $"I am IRobot from {GetType().Name}";
-
-
 }

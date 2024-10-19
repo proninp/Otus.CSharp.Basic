@@ -1,5 +1,5 @@
 ﻿namespace HomeWork05.src.Abstractions;
-public interface IPrinter
+public interface IPrintable
 {
     void PrintLine(string line);
     void PrintLine<T>(IEnumerable<T> elements);
