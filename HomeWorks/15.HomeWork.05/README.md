@@ -25,3 +25,31 @@
 * Пункт №6 - 1 балл;
 
 Для сдачи достаточно 6 баллов.
+
+
+### Вывод программы
+
+```
+********** Quadcopter **********
+Charging...
+Charged!
+rotor1, rotor2, rotor3, rotor4
+
+
+********** IChargeable **********
+Charging...
+Charged!
+I am IChargeable from Quadcopter
+
+
+********** IRobot **********
+I am a simple robot.
+rotor1, rotor2, rotor3, rotor4
+I am IRobot from Quadcopter
+
+
+********** IFlyingRobot **********
+I am a flying robot.
+rotor1, rotor2, rotor3, rotor4
+I am IRobot from Quadcopter
+```
