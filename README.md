@@ -1,9 +1,9 @@
 # C# Developer. Basic
 Это репозиторий курса ["OTUS C# Developer. Basic"](https://otus.ru/lessons/c-sharp-basic/)
 
-[Home Works](HomeWorks)
+[Home Works](HomeWorks/)
 
-[Project](Project)
+[Project](Project/)
 
 * Страт обучения: 08.2024 г.
 * Длительность обучения: 6 месяцев
