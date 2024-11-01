@@ -1,12 +1,16 @@
-﻿using Program02;
+﻿using Program03;
 
 var planetsCatalogue = new PlanetsCatalogue();
 
 var planetNames = new[] { "Земля", "Лимония", "Марс" };
 
-foreach (var planetName in planetNames)
+for (int i = 0; i < planetNames.Length; i++)
 {
-    var result = planetsCatalogue.GetPlanet(planetName);
+    var planetName = planetNames[i];
+    
+    var result = planetsCatalogue.GetPlanet(planetName, planetName =>
+        (planetName == planetNames[1]) ? "Это запретная планета" : null);
+
     if (string.IsNullOrEmpty(result.error))
     {
         Console.WriteLine($"Название: {planetName}; " +

@@ -1,7 +1,6 @@
-﻿namespace Program02;
+﻿namespace Program03;
 public class PlanetsCatalogue
 {
-    private int _requestsCount;
     private readonly List<Planet> _planets = new();
 
     public PlanetsCatalogue(params Planet[] planets) : this() =>
@@ -14,14 +13,14 @@ public class PlanetsCatalogue
         _planets.Add(new("Марс", 4, 21_344, _planets.Last()));
     }
 
-    public (short orderNumber, int equatorLength, string? error) GetPlanet(string name)
+    public (short orderNumber, int equatorLength, string? error) GetPlanet(string name, Func<string, string?> planetValidator)
     {
-        _requestsCount++;
-        if (_requestsCount % 3 == 0)
-            return (default, default, "Вы спрашиваете слишком часто");
+        string? error = planetValidator(name);
+        if (!string.IsNullOrEmpty(error))
+            return (default, default, error);
 
         var planet = _planets.FirstOrDefault(x => x.Name == name);
-
+        
         if (planet is null)
             return (default, default, $"Планеты с названием {name} нет в списке.");
 

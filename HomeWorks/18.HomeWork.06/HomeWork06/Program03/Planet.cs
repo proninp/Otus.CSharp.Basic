@@ -1,4 +1,4 @@
-﻿namespace Program02;
+﻿namespace Program03;
 public class Planet
 {
     public string Name { get; init; }
