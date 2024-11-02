@@ -11,6 +11,8 @@ public sealed class PutExpenseDto : PutEntryDto
             Id = Id,
             Amount = Amount,
             Description = Description,
+            AccountId = AccountId,
+            CategoryId = CategoryId,
         };
     }
 }

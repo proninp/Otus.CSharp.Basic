@@ -17,6 +17,8 @@ public static class IncomeMappings
             Amount = income.Amount,
             Description = income.Description,
             Date = income.Date.ToLocalTime(),
+            AccoutId = income.AccountId,
+            CategoryId = income.CategoryId,
         };
     }
 }
