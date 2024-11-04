@@ -11,9 +11,9 @@ public abstract class Entry
 
     public DateTime Date { get; set; } = DateTime.UtcNow;
 
-    public int AccountId { get; set; }
+    public long AccountId { get; set; }
 
-    public int CategoryId { get; set; }
+    public long CategoryId { get; set; }
 
     public long UserId { get; set; }
 

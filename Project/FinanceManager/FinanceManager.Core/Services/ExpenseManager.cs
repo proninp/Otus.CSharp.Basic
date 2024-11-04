@@ -1,5 +1,5 @@
 ﻿using FinanceManager.Core.DataTransferObjects;
-using FinanceManager.Core.Models;
+using FinanceManager.Core.Models.Entries;
 using FinanceManager.Core.Services.Abstractions;
 
 namespace FinanceManager.Core.Services;

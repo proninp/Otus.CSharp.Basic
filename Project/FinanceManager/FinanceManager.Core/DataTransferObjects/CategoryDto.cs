@@ -6,6 +6,8 @@ public class CategoryDto
     public long Id { get; set; }
     
     public long ParentCategoryId { get; set; }
+
+    public long UserId { get; set; }
     
     public string Title { get; set; }
 
@@ -25,6 +27,7 @@ public static class CategoryMappings
             Expense = category.Expense,
             Income = category.Income,
             ParentCategoryId = category.ParentCategoryId,
+            UserId = category.UserId
         };
     }
 }

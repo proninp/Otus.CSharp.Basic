@@ -7,7 +7,7 @@ public class Currency
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    public short Id { get; set; }
 
     public required string Title { get; set; }
 

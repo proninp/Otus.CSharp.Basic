@@ -3,15 +3,17 @@
 namespace FinanceManager.Core.DataTransferObjects;
 public class AccountDto
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public string Title { get; set; }
 
-    public AccountType Type { get; set; }
+    public short AccountTypeId { get; set; }
 
-    public int CurrencyId { get; set; }
+    public short CurrencyId { get; set; }
 
-    public double CurrentBalance { get; set; }
+    public long UserId { get; set; }
+
+    public decimal Balance { get; set; }
 
     public bool IsDefault { get; set; }
 
@@ -26,9 +28,10 @@ public static class AccountMappings
         {
             Id = account.Id,
             Title = account.Title,
-            Type = account.Type,
+            AccountTypeId = account.AccountTypeId,
             CurrencyId = account.CurrencyId,
-            CurrentBalance = account.CurrentBalance,
+            UserId = account.UserId,
+            Balance = account.Balance,
             IsDefault = account.IsDefault,
             IsArchived = account.IsArchived,
         };

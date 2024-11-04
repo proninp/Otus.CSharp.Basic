@@ -1,5 +1,5 @@
 ﻿using FinanceManager.Core.DataTransferObjects.Abstractions;
-using FinanceManager.Core.Models;
+using FinanceManager.Core.Models.Entries;
 
 namespace FinanceManager.Core.DataTransferObjects;
 public sealed class ExpenseDto : EntryDto

@@ -3,7 +3,7 @@
 namespace FinanceManager.Core.DataTransferObjects;
 public class CurrencyDto
 {
-    public int Id { get; set; }
+    public short Id { get; set; }
 
     public string Title { get; set; }
 

@@ -6,19 +6,31 @@ public class Account
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public string Title { get; set; } = string.Empty;
 
-    public AccountType Type { get; set; }
-
-    public int CurrencyId { get; set; }
-
-    public double CurrentBalance { get; set; }
+    public decimal Balance { get; set; }
 
     public bool IsDefault { get; set; }
 
     public bool IsArchived { get; set; }
 
-    public Currency Currency { get; set; }
+    [Required]
+    public required short AccountTypeId { get; set; }
+    
+    [Required]
+    public required AccountType AccountType { get; set; }
+
+    [Required]
+    public required short CurrencyId { get; set; }
+
+    [Required]
+    public required Currency Currency { get; set; }
+
+    [Required]
+    public required long UserId { get; set; }
+
+    [Required]
+    public required User User { get; set; }
 }

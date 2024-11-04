@@ -6,7 +6,7 @@ public class Category
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public string Title { get; set; } = string.Empty;
 
@@ -14,7 +14,13 @@ public class Category
 
     public bool Income { get; set; }
 
-    public int ParentCategoryId { get; set; }
+    public long ParentCategoryId { get; set; }
 
     public Category? ParentCategory { get; set; }
+
+    [Required]
+    public required long UserId { get; set; }
+    
+    [Required]
+    public required User User { get; set; }
 }

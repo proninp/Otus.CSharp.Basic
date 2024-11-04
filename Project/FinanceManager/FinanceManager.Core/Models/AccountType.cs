@@ -1,16 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Core.Models;
-public enum AccountType
+public class AccountType
 {
-    [Description("Cash")]
-    Cash,
-    [Description("Debit/credit card")]
-    DebitСreditСard,
-    [Description("Checking")]
-    Checking,
-    [Description("Loan")]
-    Loan,
-    [Description("Deposit")]
-    Deposit
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public short Id { get; set; }
+
+    public required string Name { get; set; }
 }
