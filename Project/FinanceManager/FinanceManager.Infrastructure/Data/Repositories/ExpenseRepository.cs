@@ -1,4 +1,4 @@
-﻿using FinanceManager.Core.Models;
+﻿using FinanceManager.Core.Models.Entries;
 using FinanceManager.Core.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
 

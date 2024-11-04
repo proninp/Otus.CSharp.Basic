@@ -13,6 +13,7 @@ public sealed class PutIncomeDto : PutEntryDto
             Description = Description,
             AccountId = AccountId,
             CategoryId = CategoryId,
+            UserId = UserId,
         };
     }
 }

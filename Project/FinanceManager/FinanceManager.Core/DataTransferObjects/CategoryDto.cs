@@ -4,15 +4,14 @@ namespace FinanceManager.Core.DataTransferObjects;
 public class CategoryDto
 {
     public long Id { get; set; }
-
+    
+    public long ParentCategoryId { get; set; }
+    
     public string Title { get; set; }
 
     public bool Expense { get; set; }
 
     public bool Income { get; set; }
-
-    public long ParentCategoryId { get; set; }
-
 }
 
 public static class CategoryMappings

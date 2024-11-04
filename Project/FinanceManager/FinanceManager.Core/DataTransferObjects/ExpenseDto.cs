@@ -19,6 +19,7 @@ public static class ExpenseMappings
             Date = expense.Date.ToLocalTime(), 
             AccoutId = expense.AccountId,
             CategoryId = expense.CategoryId,
+            UserId = expense.UserId,
         };
     }
 }
