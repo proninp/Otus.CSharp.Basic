@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Core.Models;
-using FinanceManager.Core.Models.Entries;
 using FinanceManager.Core.Options;
 using FinanceManager.Core.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -15,14 +14,13 @@ public sealed class AppDbContext : DbContext, IUnitOfWork
         this.options = options;
     }
 
-    
+
     public DbSet<User> Users { get; set; }
     public DbSet<Currency> Currencies { get; set; }
     public DbSet<AccountType> AccountTypes { get; set; }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Expense> Expenses { get; set; }
-    public DbSet<Income> Incomes { get; set; }
+    public DbSet<Entry> Entry { get; set; }
     public DbSet<Transfer> Transfers { get; set; }
 
     public async Task<int> Commit(CancellationToken cancellationToken = default)

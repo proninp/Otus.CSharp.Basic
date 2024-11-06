@@ -1,18 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FinanceManager.Core.Models;
+﻿namespace FinanceManager.Core.Models;
 public class User
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; set; }
+    public long Id { get; }
 
-    public string Name { get; set; } = string.Empty;
+    public long TelegramId { get; }
 
-    public long TelegramId { get; set; }
+    public string? Name { get; }
 
-    public ICollection<Account>? Accounts { get; set; }
+    public ICollection<Account> Accounts { get; } = Array.Empty<Account>();
 
-    public ICollection<Category>? Categories { get; set; }
+    public ICollection<Category> Categories { get; } = Array.Empty<Category>();
+
+    public ICollection<Entry> Expenses { get; } = Array.Empty<Entry>();
+
+    protected User() { }
+
+    public User(long telegramId, string? name = null)
+    {
+        TelegramId = telegramId;
+        Name = name;
+    }
+
+    public void AddAccount(Account account)
+    {
+        Accounts.Add(account);
+    }
 }

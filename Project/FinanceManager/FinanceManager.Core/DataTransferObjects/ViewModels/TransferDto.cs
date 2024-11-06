@@ -1,6 +1,6 @@
-﻿using FinanceManager.Core.Models.Entries;
+﻿using FinanceManager.Core.Models;
 
-namespace FinanceManager.Core.DataTransferObjects;
+namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public class TransferDto
 {
     public long Id { get; set; }

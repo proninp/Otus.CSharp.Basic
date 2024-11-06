@@ -1,19 +1,13 @@
 ﻿using FinanceManager.Core.Models;
 
-namespace FinanceManager.Core.DataTransferObjects;
+namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public class CategoryDto
 {
     public long Id { get; set; }
-    
-    public long ParentCategoryId { get; set; }
 
-    public long UserId { get; set; }
-    
-    public string Title { get; set; }
+    public long? ParentCategoryId { get; set; }
 
-    public bool Expense { get; set; }
-
-    public bool Income { get; set; }
+    public string? Title { get; set; }
 }
 
 public static class CategoryMappings
@@ -24,10 +18,7 @@ public static class CategoryMappings
         {
             Id = category.Id,
             Title = category.Title,
-            Expense = category.Expense,
-            Income = category.Income,
             ParentCategoryId = category.ParentCategoryId,
-            UserId = category.UserId
         };
     }
 }

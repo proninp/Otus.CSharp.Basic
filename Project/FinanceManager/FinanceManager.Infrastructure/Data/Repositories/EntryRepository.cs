@@ -1,40 +1,40 @@
-﻿using FinanceManager.Core.Models.Entries;
+﻿using FinanceManager.Core.Models;
 using FinanceManager.Core.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Infrastructure.Data.Repositories;
-public sealed class ExpenseRepository(AppDbContext context) : IExpenseRepository
+public sealed class EntryRepository(AppDbContext context) : IEntryRepository
 {
-    public async Task<Expense?> GetById(long id)
+    public async Task<Entry?> GetById(long id)
     {
         return await context
-            .Expenses
+            .Entry
             .AsNoTracking()
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public async Task<TResult[]> GetAll<TResult>(Func<Expense, TResult> selector)
+    public async Task<TResult[]> GetAll<TResult>(Func<Entry, TResult> selector)
     {
         return await context
-            .Expenses
+            .Entry
             .AsNoTracking()
             .OrderBy(e => e.Date)
             .Select(x => selector(x))
             .ToArrayAsync();
     }
-    
-    public void Add(Expense expense)
+
+    public void Add(Entry expense)
     {
         context.Add(expense);
     }
 
-    public void Delete(Expense expense)
+    public void Delete(Entry entry)
     {
-        context.Expenses.Remove(expense);
+        context.Entry.Remove(entry);
     }
 
-    public void Update(Expense expense)
+    public void Update(Entry entry)
     {
-        context.Expenses.Update(expense);
+        context.Entry.Update(entry);
     }
 }

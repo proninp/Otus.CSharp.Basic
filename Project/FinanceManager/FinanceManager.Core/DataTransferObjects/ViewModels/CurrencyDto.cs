@@ -3,13 +3,13 @@
 namespace FinanceManager.Core.DataTransferObjects;
 public class CurrencyDto
 {
-    public short Id { get; set; }
+    public short Id { get; init; }
 
-    public string Title { get; set; }
+    public string Title { get; init; }
 
-    public string CurrencyCode { get; set; }
+    public string CurrencyCode { get; init; }
 
-    public string CurrencySign { get; set; }
+    public string CurrencySign { get; init; }
 }
 
 public static class CurrencyMappings

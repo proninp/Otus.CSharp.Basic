@@ -1,14 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace FinanceManager.Core.Models;
-public class Account
+﻿namespace FinanceManager.Core.Models;
+public sealed class Account
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; set; }
+    public long Id { get; }
 
-    public string Title { get; set; } = string.Empty;
+    public string? Title { get; set; }
 
     public decimal Balance { get; set; }
 
@@ -16,21 +11,20 @@ public class Account
 
     public bool IsArchived { get; set; }
 
-    [Required]
-    public required short AccountTypeId { get; set; }
-    
-    [Required]
-    public required AccountType AccountType { get; set; }
+    public short AccountTypeId { get; }
 
-    [Required]
-    public required short CurrencyId { get; set; }
+    public AccountType AccountType { get; }
 
-    [Required]
-    public required Currency Currency { get; set; }
+    public short CurrencyId { get; }
 
-    [Required]
-    public required long UserId { get; set; }
+    public Currency Currency { get; }
 
-    [Required]
-    public required User User { get; set; }
+    protected Account() { }
+
+    public Account(short accountTypeId, short currencyId, string? title = null)
+    {
+        AccountTypeId = accountTypeId;
+        CurrencyId = currencyId;
+        Title = title;
+    }
 }

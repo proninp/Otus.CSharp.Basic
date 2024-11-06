@@ -1,17 +1,17 @@
-﻿using FinanceManager.Core.Models;
+﻿using FinanceManager.Core.DataTransferObjects.ViewModels;
 
 namespace FinanceManager.Core.Services;
-public sealed class FinanceService(ExpenseManager expenseManager, IncomeManager incomeManager)
+public sealed class FinanceService(EntryManager entryManager)
 {
     public async Task<FinanceViewModel> GetFinanceData()
     {
-        var expenses = await expenseManager.GetExpenses();
-        var incomes = await incomeManager.GetIncomes();
+        var entries = await entryManager.GetEntry();
+        // TODO accounts
+        // TODO categories
         
         return new FinanceViewModel
         {
-            Expenses = expenses,
-            Incomes = incomes,
+            Entries = entries,
         };
     }
 }

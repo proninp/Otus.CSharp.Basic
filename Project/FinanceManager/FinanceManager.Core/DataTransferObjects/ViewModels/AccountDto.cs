@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Core.Models;
 
-namespace FinanceManager.Core.DataTransferObjects;
+namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public class AccountDto
 {
     public long Id { get; set; }
@@ -30,7 +30,6 @@ public static class AccountMappings
             Title = account.Title,
             AccountTypeId = account.AccountTypeId,
             CurrencyId = account.CurrencyId,
-            UserId = account.UserId,
             Balance = account.Balance,
             IsDefault = account.IsDefault,
             IsArchived = account.IsArchived,
