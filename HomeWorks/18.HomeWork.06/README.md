@@ -62,23 +62,23 @@
 ### Вывод [программы 1](HomeWork06/Program01/Program.cs):
 
 ```
-{ Name = Венера, Number = 2, EquatorLength = 38025, PreviousPlanet =  }
+{ Name = Венера, OrdrNumber = 2, EquatorLength = 38025, PreviousPlanet = { Name = Меркурий, OrdrNumber = 1, EquatorLength = 15329, PreviousPlanet =  } }
 Экввалентна Венере = True
 
 ----------------------------------------------------------------------------------------------------
 
-{ Name = Земля, OrdrNumber = 3, EquatorLength = 40075, PreviousPlanet = { Name = Венера, Number = 2, EquatorLength = 38025, PreviousPlanet =  } }
+{ Name = Земля, OrdrNumber = 3, EquatorLength = 40075, PreviousPlanet = { Name = Венера, OrdrNumber = 2, EquatorLength = 38025, PreviousPlanet = { Name = Меркурий, OrdrNumber = 1, EquatorLength = 15329, PreviousPlanet =  } } }
 Экввалентна Венере = False
 
 ----------------------------------------------------------------------------------------------------
 
-{ Name = Марс, OrdrNumber = 4, EquatorLength = 21344, PreviousPlanet = { Name = Земля, OrdrNumber = 3, EquatorLength = 40075, PreviousPlanet = { Name = Венера, Number = 2, EquatorLength = 38025, PreviousPlanet =  } } }
+{ Name = Марс, OrdrNumber = 4, EquatorLength = 21344, PreviousPlanet = { Name = Земля, OrdrNumber = 3, EquatorLength = 40075, PreviousPlanet = { Name = Венера, OrdrNumber = 2, EquatorLength = 38025, PreviousPlanet = { Name = Меркурий, OrdrNumber = 1, EquatorLength = 15329, PreviousPlanet =  } } } }
 Экввалентна Венере = False
 
 ----------------------------------------------------------------------------------------------------
 
-{ Name = Венера, OrdrNumber = 2, EquatorLength = 38025, PreviousPlanet = { Name = Марс, OrdrNumber = 4, EquatorLength = 21344, PreviousPlanet = { Name = Земля, OrdrNumber = 3, EquatorLength = 40075, PreviousPlanet = { Name = Венера, Number = 2, EquatorLength = 38025, PreviousPlanet =  } } } }
-Экввалентна Венере = False
+{ Name = Венера, OrdrNumber = 2, EquatorLength = 38025, PreviousPlanet = { Name = Меркурий, OrdrNumber = 1, EquatorLength = 15329, PreviousPlanet =  } }
+Экввалентна Венере = True
 ```
 
 ### Вывод [программы 2](HomeWork06/Program02/Program.cs):
@@ -92,6 +92,12 @@
 ### Вывод [программы 3](HomeWork06/Program03/Program.cs):
 
 ```
+Вывод стандартного задания:
+Название: Земля; Порядковый номер: 3; Длина экватора: 40075
+Планеты с названием Лимония нет в списке.
+Вы спрашиваете слишком часто
+
+(*) Вывод задания со звездочкой:
 Название: Земля; Порядковый номер: 3; Длина экватора: 40075
 Это запретная планета
 Название: Марс; Порядковый номер: 4; Длина экватора: 21344

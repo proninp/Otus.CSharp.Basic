@@ -1,9 +1,25 @@
-﻿var venus1 = new
+﻿var mercury = new
+{
+    Name = "Меркурий",
+    OrdrNumber = (short)1,
+    EquatorLength = 15_329,
+    PreviousPlanet = null as object
+};
+
+var venus1 = new
 {
     Name = "Венера",
-    Number = (short)2,
+    OrdrNumber = (short)2,
     EquatorLength = 38_025,
-    PreviousPlanet = null as object
+    PreviousPlanet = mercury
+};
+
+var venus2 = new
+{
+    Name = "Венера",
+    OrdrNumber = (short)2,
+    EquatorLength = 38_025,
+    PreviousPlanet = mercury
 };
 
 var earth = new
@@ -20,14 +36,6 @@ var mars = new
     OrdrNumber = (short)4,
     EquatorLength = 21_344,
     PreviousPlanet = earth
-};
-
-var venus2 = new
-{
-    Name = "Венера",
-    OrdrNumber = (short)2,
-    EquatorLength = 38_025,
-    PreviousPlanet = mars
 };
 
 string separator = $"{Environment.NewLine}{new string('-', 100)}{Environment.NewLine}";
