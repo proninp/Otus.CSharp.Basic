@@ -14,8 +14,8 @@ public static class DependencyInjection
     {
         services.Configure<DbOptions>(configuration.GetSection(nameof(DbOptions)));
         services.AddDbContext<IUnitOfWork, AppDbContext>();
-        services.AddScoped<EntryManager>();
-        services.AddScoped<IEntryRepository, EntryRepository>();
+        services.AddScoped<TransactionManager>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<FinanceService>();
         services.AddHostedService<AppInitializer>();
 

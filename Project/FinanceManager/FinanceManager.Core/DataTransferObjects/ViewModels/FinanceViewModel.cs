@@ -3,9 +3,9 @@
 namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public sealed class FinanceViewModel
 {
-    public EntryDto[] Entries { get; set; }
+    public TransactionDto[] Transactions { get; init; }
 
-    public AccountDto[] Accounts { get; set; }
+    public AccountDto[] Accounts { get; init; }
 
-    public CategoryDto[] Categories { get; set; }
+    public CategoryDto[] Categories { get; init; }
 }

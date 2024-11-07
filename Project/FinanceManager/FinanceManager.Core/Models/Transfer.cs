@@ -1,28 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FinanceManager.Core.Models;
+﻿namespace FinanceManager.Core.Models;
 public class Transfer
 {
-    public long Id { get; set; }
+    public long Id { get; }
 
-    public DateTime Date { get; set; } = DateTime.UtcNow;
+    public long UserId { get; }
 
-    public int FromAccountId { get; set; }
+    public long FromAccountId { get; set; }
 
-    public int ToAccountId { get; set; }
+    public long ToAccountId { get; set; }
 
-    public long UserId { get; set; }
+    public DateTime Date { get; set; }
 
     public decimal FromAmount { get; set; }
 
     public decimal ToAmount { get; set; }
 
-    public string Description { get; set; } = string.Empty;
+    public string? Description { get; set; }
+
+    public User User { get; set; }
 
     public Account FromAccount { get; set; }
 
     public Account ToAccount { get; set; }
 
-    public User User { get; set; }
+    public Transfer(long userId, long fromAccountId, long toAccountId, DateTime? date, decimal fromAmount = 0, decimal toAmount = 0, string? description = null)
+    {
+        UserId = userId;
+        FromAccountId = fromAccountId;
+        ToAccountId = toAccountId;
+        Date = date ?? DateTime.UtcNow;
+        FromAmount = fromAmount;
+        ToAmount = toAmount;
+        Description = description;
+    }
 }

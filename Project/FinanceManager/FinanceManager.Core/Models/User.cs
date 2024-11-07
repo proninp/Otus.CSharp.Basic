@@ -5,13 +5,13 @@ public class User
 
     public long TelegramId { get; }
 
-    public string? Name { get; }
+    public string? Name { get; set; }
 
     public ICollection<Account> Accounts { get; } = Array.Empty<Account>();
 
     public ICollection<Category> Categories { get; } = Array.Empty<Category>();
 
-    public ICollection<Entry> Expenses { get; } = Array.Empty<Entry>();
+    public ICollection<Transaction> Expenses { get; } = Array.Empty<Transaction>();
 
     protected User() { }
 

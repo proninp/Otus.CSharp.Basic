@@ -1,6 +1,6 @@
 ﻿namespace FinanceManager.Core.Models;
 
-public sealed class Entry
+public sealed class Transaction
 {
     public long Id { get; }
 
@@ -22,9 +22,7 @@ public sealed class Entry
 
     public Category? Category { get; set; }
 
-    protected Entry() { }
-
-    public Entry(long userId, long accountId, long? categoryId = null, DateTime? date = null, decimal amount = 0, string? description = null)
+    public Transaction(long userId, long accountId, long? categoryId = null, DateTime? date = null, decimal amount = 0, string? description = null)
     {
         UserId = userId;
         AccountId = accountId;

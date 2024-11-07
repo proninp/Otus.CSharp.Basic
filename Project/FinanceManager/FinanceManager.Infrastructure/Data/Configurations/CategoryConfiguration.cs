@@ -9,5 +9,10 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         builder.HasOne<User>()
             .WithMany();
+
+        builder.HasOne(c => c.ParentCategory)
+            .WithMany(c => c.SubCategories)
+            .HasForeignKey(c => c.ParentCategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

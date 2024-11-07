@@ -1,17 +1,17 @@
 ﻿using FinanceManager.Core.DataTransferObjects.ViewModels;
 
 namespace FinanceManager.Core.Services;
-public sealed class FinanceService(EntryManager entryManager)
+public sealed class FinanceService(TransactionManager transactionManager)
 {
     public async Task<FinanceViewModel> GetFinanceData()
     {
-        var entries = await entryManager.GetEntry();
+        var transactions = await transactionManager.GetTransactions();
         // TODO accounts
         // TODO categories
         
         return new FinanceViewModel
         {
-            Entries = entries,
+            Transactions = transactions,
         };
     }
 }

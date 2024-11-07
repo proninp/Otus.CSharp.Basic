@@ -1,15 +1,18 @@
-﻿using FinanceManager.Core.DataTransferObjects;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FinanceManager.Core.Models;
+﻿namespace FinanceManager.Core.Models;
 public class Currency
 {
-    public short Id { get; set; }
+    public short Id { get; }
 
-    public required string Title { get; set; }
+    public string Title { get; }
 
-    public required string CurrencyCode { get; set; }
+    public string CurrencyCode { get; }
 
-    public required string CurrencySign { get; set; } = string.Empty;
+    public string CurrencySign { get; }
+
+    public Currency(string title, string currencyCode, string currencySign)
+    {
+        Title = title;
+        CurrencyCode = currencyCode;
+        CurrencySign = currencySign;
+    }
 }

@@ -1,7 +1,7 @@
 ﻿using FinanceManager.Core.Models;
 
 namespace FinanceManager.Core.DataTransferObjects.ViewModels;
-public class EntryDto
+public class TransactionDto
 {
     public long Id { get; init; }
 
@@ -11,19 +11,18 @@ public class EntryDto
 
     public long? CategoryId { get; init; }
 
-    public DateTime? Date { get; init; }
-
-    public string? Description { get; init; }
+    public DateTime Date { get; init; }
 
     public decimal Amount { get; init; }
 
+    public string? Description { get; init; }
 }
 
-public static class EntryMappings
+public static class TransactionMappings
 {
-    public static EntryDto ToDto(this Entry entry)
+    public static TransactionDto ToDto(this Transaction entry)
     {
-        return new EntryDto
+        return new TransactionDto
         {
             Id = entry.Id,
             UserId = entry.UserId,

@@ -3,15 +3,13 @@
 namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public class AccountDto
 {
-    public long Id { get; set; }
+    public long Id { get; init; }
 
-    public string Title { get; set; }
+    public short AccountTypeId { get; init; }
 
-    public short AccountTypeId { get; set; }
+    public short CurrencyId { get; init; }
 
-    public short CurrencyId { get; set; }
-
-    public long UserId { get; set; }
+    public string? Title { get; set; }
 
     public decimal Balance { get; set; }
 
