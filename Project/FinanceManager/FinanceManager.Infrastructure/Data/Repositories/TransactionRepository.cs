@@ -27,7 +27,7 @@ public sealed class TransactionRepository(AppDbContext context) : ITransactionRe
     {
         context.Add(transaction);
     }
-    
+
     public void Update(Transaction transaction)
     {
         context.Transactions.Update(transaction);

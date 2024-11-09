@@ -2,9 +2,9 @@
 
 public sealed class Transaction
 {
-    public long Id { get; }
+    public long Id { get; init; }
 
-    public long UserId { get; }
+    public long UserId { get; init; }
 
     public long AccountId { get; set; }
 
@@ -21,6 +21,8 @@ public sealed class Transaction
     public Account Account { get; set; }
 
     public Category? Category { get; set; }
+
+    protected Transaction() { }
 
     public Transaction(long userId, long accountId, long? categoryId = null, DateTime? date = null, decimal amount = 0, string? description = null)
     {

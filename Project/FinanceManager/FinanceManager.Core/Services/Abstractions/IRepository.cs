@@ -1,13 +1,16 @@
 ﻿namespace FinanceManager.Core.Services.Abstractions;
+
 public interface IRepository<T>
 {
-    void Add(T item);
-
-    void Delete(T item);
-
-    void Update(T item);
+    Task<T?> GetById(long id);
 
     Task<TResult[]> GetAll<TResult>(Func<T, TResult> selector);
 
-    Task<T?> GetById(long id);
+    void Add(T item);
+    
+    void Update(T item);
+
+    void Delete(T item);
+
+    Task Delete(long id);
 }

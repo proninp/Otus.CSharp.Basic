@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace FinanceManager.Core.Models;
 public class AccountType
 {
-    public short Id { get; }
+    public int Id { get; init; }
 
-    public string Name { get; }
+    public string Name { get; init; }
 
     public AccountType(string name)
     {

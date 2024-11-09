@@ -5,9 +5,11 @@ public class PutAccountDto
 {
     public long Id { get; init; }
 
-    public short AccountTypeId { get; init; }
+    public long UserId { get; init; }
+    
+    public int AccountTypeId { get; init; }
 
-    public short CurrencyId { get; init; }
+    public int CurrencyId { get; init; }
 
     public string? Title { get; set; }
 

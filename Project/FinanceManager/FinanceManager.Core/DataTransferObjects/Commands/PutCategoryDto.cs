@@ -5,6 +5,8 @@ public class PutCategoryDto
 {
     public long Id { get; init; }
 
+    public long UsertId { get; init; }
+
     public string? Title { get; set; }
 
     public long? ParentCategoryId { get; set; }

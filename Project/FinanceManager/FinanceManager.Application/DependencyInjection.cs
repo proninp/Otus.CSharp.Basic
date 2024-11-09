@@ -14,10 +14,11 @@ public static class DependencyInjection
     {
         services.Configure<DbOptions>(configuration.GetSection(nameof(DbOptions)));
         services.AddDbContext<IUnitOfWork, AppDbContext>();
+
+        services.AddHostedService<AppInitializer>();
         services.AddScoped<TransactionManager>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<FinanceService>();
-        services.AddHostedService<AppInitializer>();
 
         return services;
     }

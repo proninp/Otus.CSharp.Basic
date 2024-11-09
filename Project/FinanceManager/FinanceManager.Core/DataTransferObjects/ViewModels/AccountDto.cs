@@ -5,9 +5,11 @@ public class AccountDto
 {
     public long Id { get; init; }
 
-    public short AccountTypeId { get; init; }
+    public long UserId { get; init; }
 
-    public short CurrencyId { get; init; }
+    public int AccountTypeId { get; init; }
+
+    public int CurrencyId { get; init; }
 
     public string? Title { get; set; }
 
@@ -25,6 +27,7 @@ public static class AccountMappings
         return new AccountDto
         {
             Id = account.Id,
+            UserId = account.UserId,
             Title = account.Title,
             AccountTypeId = account.AccountTypeId,
             CurrencyId = account.CurrencyId,

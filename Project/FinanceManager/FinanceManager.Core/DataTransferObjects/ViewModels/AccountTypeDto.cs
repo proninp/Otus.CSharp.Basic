@@ -4,7 +4,7 @@ namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 
 public class AccountTypeDto
 {
-    public short Id { get; init; }
+    public int Id { get; init; }
 
     public string Name { get; init; }
 }

@@ -1,13 +1,13 @@
 ﻿namespace FinanceManager.Core.Models;
 public class Currency
 {
-    public short Id { get; }
+    public int Id { get; init; }
 
-    public string Title { get; }
+    public string Title { get; init; }
 
-    public string CurrencyCode { get; }
+    public string CurrencyCode { get; init; }
 
-    public string CurrencySign { get; }
+    public string CurrencySign { get; init; }
 
     public Currency(string title, string currencyCode, string currencySign)
     {

@@ -7,12 +7,12 @@ public static class DataSeeder
     {
         return new[]
         {
-            new Currency(currencyCode: "RUB", title: "Russian Ruble", currencySign: "₽"),
-            new Currency(currencyCode: "BYN", title: "Belarusian Ruble", currencySign: "Br"),
-            new Currency(currencyCode: "USD", title: "United States Dollar", currencySign: "$"),
-            new Currency(currencyCode: "EUR", title: "Euro", currencySign: "€"),
-            new Currency(currencyCode: "GBP", title: "British Pound Sterling", currencySign: "£"),
-            new Currency(currencyCode: "TRY", title: "Turkish Lira", currencySign: "₺"),
+            new Currency(currencyCode: "RUB", title: "Russian Ruble", currencySign: "₽") { Id = 1 },
+            new Currency(currencyCode: "BYN", title: "Belarusian Ruble", currencySign: "Br") { Id = 2 },
+            new Currency(currencyCode: "USD", title: "United States Dollar", currencySign: "$") { Id = 3 },
+            new Currency(currencyCode: "EUR", title: "Euro", currencySign: "€") { Id = 4 },
+            new Currency(currencyCode: "GBP", title: "British Pound Sterling", currencySign: "£") { Id = 5 },
+            new Currency(currencyCode: "TRY", title: "Turkish Lira", currencySign: "₺") { Id = 6 },
         };
     }
 
@@ -20,11 +20,11 @@ public static class DataSeeder
     {
         return new[]
         {
-            new AccountType("Cash"),
-            new AccountType("Debit/credit card"),
-            new AccountType("Checking"),
-            new AccountType("Loan"),
-            new AccountType("Deposit"),
+            new AccountType("Cash") { Id = 1 },
+            new AccountType("Debit/credit card") { Id = 2 },
+            new AccountType("Checking") { Id = 3 },
+            new AccountType("Loan") { Id = 4 },
+            new AccountType("Deposit") { Id = 5 },
         };
     }
 }

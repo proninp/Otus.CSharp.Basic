@@ -5,6 +5,8 @@ public class CategoryDto
 {
     public long Id { get; init; }
 
+    public long UserId { get; init; }
+
     public string? Title { get; set; }
 
     public long? ParentCategoryId { get; set; }
@@ -17,6 +19,7 @@ public static class CategoryMappings
         return new CategoryDto
         {
             Id = category.Id,
+            UserId = category.UserId,
             Title = category.Title,
             ParentCategoryId = category.ParentCategoryId,
         };
