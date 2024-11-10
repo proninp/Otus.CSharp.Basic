@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using FinanceManager.Core.Models.Abstractions;
 
 namespace FinanceManager.Core.Models;
-public class AccountType
+public class AccountType : BaseModel
 {
-    public int Id { get; init; }
-
     public string Name { get; init; }
 
     public AccountType(string name)

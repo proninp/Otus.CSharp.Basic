@@ -1,8 +1,8 @@
-﻿namespace FinanceManager.Core.Models;
-public class Currency
-{
-    public int Id { get; init; }
+﻿using FinanceManager.Core.Models.Abstractions;
 
+namespace FinanceManager.Core.Models;
+public class Currency : BaseModel
+{
     public string Title { get; init; }
 
     public string CurrencyCode { get; init; }

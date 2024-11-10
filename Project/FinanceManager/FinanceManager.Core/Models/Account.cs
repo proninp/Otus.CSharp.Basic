@@ -1,15 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FinanceManager.Core.Models.Abstractions;
 
 namespace FinanceManager.Core.Models;
-public sealed class Account
+public sealed class Account : BaseModel
 {
-    public long Id { get; init; }
+    public Guid UserId { get; init; }
 
-    public long UserId { get; init; }
-    
-    public int AccountTypeId { get; init; }
+    public Guid AccountTypeId { get; init; }
 
-    public int CurrencyId { get; init; }
+    public Guid CurrencyId { get; init; }
 
     public string? Title { get; set; }
 
@@ -23,7 +21,7 @@ public sealed class Account
 
     public Currency Currency { get; }
 
-    public Account(long userId, int accountTypeId, int currencyId, string? title = null, decimal balance = 0, bool isDefault = false, bool isArchived = false)
+    public Account(Guid userId, Guid accountTypeId, Guid currencyId, string? title = null, decimal balance = 0, bool isDefault = false, bool isArchived = false)
     {
         UserId = userId;
         AccountTypeId = accountTypeId;

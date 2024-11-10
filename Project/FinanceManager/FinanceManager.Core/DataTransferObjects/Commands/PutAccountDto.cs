@@ -1,15 +1,16 @@
-﻿using FinanceManager.Core.Models;
+﻿using FinanceManager.Core.DataTransferObjects.Commands.Abstractions;
+using FinanceManager.Core.Models;
 
 namespace FinanceManager.Core.DataTransferObjects.Commands;
-public class PutAccountDto
+public class PutAccountDto : BasePutDto<Account>
 {
-    public long Id { get; init; }
+    public Guid? Id { get; init; }
 
-    public long UserId { get; init; }
+    public Guid UserId { get; init; }
     
-    public int AccountTypeId { get; init; }
+    public Guid AccountTypeId { get; init; }
 
-    public int CurrencyId { get; init; }
+    public Guid CurrencyId { get; init; }
 
     public string? Title { get; set; }
 
@@ -18,4 +19,7 @@ public class PutAccountDto
     public bool IsDefault { get; set; }
 
     public bool IsArchived { get; set; }
+
+    public override Account ToModel() =>
+        new Account(UserId, AccountTypeId, CurrencyId, Title, Balance, IsDefault, IsArchived);
 }

@@ -16,8 +16,13 @@ public static class DependencyInjection
         services.AddDbContext<IUnitOfWork, AppDbContext>();
 
         services.AddHostedService<AppInitializer>();
+        services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<UserManager>();
+        services.AddScoped<AccountManager>();
+        services.AddScoped<CategoryManager>();
         services.AddScoped<TransactionManager>();
-        services.AddScoped<ITransactionRepository, TransactionRepository>();
+        services.AddScoped<TransferManager>();
         services.AddScoped<FinanceService>();
 
         return services;

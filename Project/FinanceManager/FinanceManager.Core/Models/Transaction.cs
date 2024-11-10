@@ -1,16 +1,16 @@
-﻿namespace FinanceManager.Core.Models;
+﻿using FinanceManager.Core.Models.Abstractions;
 
-public sealed class Transaction
+namespace FinanceManager.Core.Models;
+
+public sealed class Transaction : BaseModel
 {
-    public long Id { get; init; }
+    public Guid UserId { get; init; }
 
-    public long UserId { get; init; }
-
-    public long AccountId { get; set; }
+    public Guid AccountId { get; set; }
 
     public DateTime Date { get; set; }
 
-    public long? CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
 
     public decimal Amount { get; set; }
 
@@ -24,7 +24,7 @@ public sealed class Transaction
 
     protected Transaction() { }
 
-    public Transaction(long userId, long accountId, long? categoryId = null, DateTime? date = null, decimal amount = 0, string? description = null)
+    public Transaction(Guid userId, Guid accountId, Guid? categoryId = null, DateTime? date = null, decimal amount = 0, string? description = null)
     {
         UserId = userId;
         AccountId = accountId;

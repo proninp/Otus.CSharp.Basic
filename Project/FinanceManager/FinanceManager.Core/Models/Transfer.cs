@@ -1,13 +1,13 @@
-﻿namespace FinanceManager.Core.Models;
-public class Transfer
+﻿using FinanceManager.Core.Models.Abstractions;
+
+namespace FinanceManager.Core.Models;
+public class Transfer : BaseModel
 {
-    public long Id { get; init; }
+    public Guid UserId { get; init; }
 
-    public long UserId { get; init; }
+    public Guid FromAccountId { get; set; }
 
-    public long FromAccountId { get; set; }
-
-    public long ToAccountId { get; set; }
+    public Guid ToAccountId { get; set; }
 
     public DateTime Date { get; set; }
 
@@ -25,7 +25,7 @@ public class Transfer
 
     protected Transfer() { }
 
-    public Transfer(long userId, long fromAccountId, long toAccountId, DateTime? date, decimal fromAmount = 0, decimal toAmount = 0, string? description = null)
+    public Transfer(Guid userId, Guid fromAccountId, Guid toAccountId, DateTime? date, decimal fromAmount = 0, decimal toAmount = 0, string? description = null)
     {
         UserId = userId;
         FromAccountId = fromAccountId;

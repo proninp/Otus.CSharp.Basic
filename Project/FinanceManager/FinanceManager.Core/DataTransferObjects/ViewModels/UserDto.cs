@@ -3,7 +3,7 @@
 namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public class UserDto
 {
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     public long TelegramId { get; init; }
 

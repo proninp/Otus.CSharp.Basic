@@ -1,15 +1,16 @@
-﻿using FinanceManager.Core.Models;
+﻿using FinanceManager.Core.DataTransferObjects.Commands.Abstractions;
+using FinanceManager.Core.Models;
 
 namespace FinanceManager.Core.DataTransferObjects.Commands;
-public class PutTransactionDto
+public class PutTransactionDto : BasePutDto<Transaction>
 {
-    public long Id { get; init; }
+    public Guid? Id { get; init; }
 
-    public long UserId { get; init; }
+    public Guid UserId { get; init; }
 
-    public long AccountId { get; set; }
+    public Guid AccountId { get; set; }
 
-    public long? CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
 
     public DateTime Date { get; set; }
 
@@ -17,8 +18,6 @@ public class PutTransactionDto
 
     public string? Description { get; set; }
 
-    public Transaction ToModel()
-    {
-        return new Transaction(UserId, AccountId, CategoryId, Date, Amount, Description);
-    }
+    public override Transaction ToModel() =>
+        new Transaction(UserId, AccountId, CategoryId, Date, Amount, Description);
 }

@@ -7,12 +7,12 @@ public static class DataSeeder
     {
         return new[]
         {
-            new Currency(currencyCode: "RUB", title: "Russian Ruble", currencySign: "₽") { Id = 1 },
-            new Currency(currencyCode: "BYN", title: "Belarusian Ruble", currencySign: "Br") { Id = 2 },
-            new Currency(currencyCode: "USD", title: "United States Dollar", currencySign: "$") { Id = 3 },
-            new Currency(currencyCode: "EUR", title: "Euro", currencySign: "€") { Id = 4 },
-            new Currency(currencyCode: "GBP", title: "British Pound Sterling", currencySign: "£") { Id = 5 },
-            new Currency(currencyCode: "TRY", title: "Turkish Lira", currencySign: "₺") { Id = 6 },
+            new Currency(currencyCode: "RUB", title: "Russian Ruble", currencySign: "₽") { Id = Guid.NewGuid() },
+            new Currency(currencyCode: "BYN", title: "Belarusian Ruble", currencySign: "Br") { Id = Guid.NewGuid() },
+            new Currency(currencyCode: "USD", title: "United States Dollar", currencySign: "$") { Id = Guid.NewGuid() },
+            new Currency(currencyCode: "EUR", title: "Euro", currencySign: "€") { Id = Guid.NewGuid() },
+            new Currency(currencyCode: "GBP", title: "British Pound Sterling", currencySign: "£") { Id = Guid.NewGuid() },
+            new Currency(currencyCode: "TRY", title: "Turkish Lira", currencySign: "₺") { Id = Guid.NewGuid() },
         };
     }
 
@@ -20,11 +20,11 @@ public static class DataSeeder
     {
         return new[]
         {
-            new AccountType("Cash") { Id = 1 },
-            new AccountType("Debit/credit card") { Id = 2 },
-            new AccountType("Checking") { Id = 3 },
-            new AccountType("Loan") { Id = 4 },
-            new AccountType("Deposit") { Id = 5 },
+            new AccountType("Cash") { Id = Guid.NewGuid() },
+            new AccountType("Debit/credit card") { Id = Guid.NewGuid() },
+            new AccountType("Checking") { Id = Guid.NewGuid() },
+            new AccountType("Loan") { Id = Guid.NewGuid() },
+            new AccountType("Deposit") { Id = Guid.NewGuid() },
         };
     }
 }

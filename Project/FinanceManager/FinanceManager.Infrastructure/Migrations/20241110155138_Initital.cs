@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,8 +17,7 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "AccountTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -31,8 +29,7 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "Currencies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     CurrencyCode = table.Column<string>(type: "text", nullable: false),
                     CurrencySign = table.Column<string>(type: "text", nullable: false)
@@ -46,8 +43,7 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TelegramId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true)
                 },
@@ -60,11 +56,10 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    AccountTypeId = table.Column<int>(type: "integer", nullable: false),
-                    CurrencyId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AccountTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CurrencyId = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Balance = table.Column<decimal>(type: "numeric", nullable: false),
                     IsDefault = table.Column<bool>(type: "boolean", nullable: false),
@@ -97,11 +92,10 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: true),
-                    ParentCategoryId = table.Column<long>(type: "bigint", nullable: true)
+                    ParentCategoryId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -124,11 +118,10 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "Transfers",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    FromAccountId = table.Column<long>(type: "bigint", nullable: false),
-                    ToAccountId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FromAccountId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ToAccountId = table.Column<Guid>(type: "uuid", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     FromAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     ToAmount = table.Column<decimal>(type: "numeric", nullable: false),
@@ -161,12 +154,11 @@ namespace FinanceManager.Infrastructure.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    AccountId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AccountId = table.Column<Guid>(type: "uuid", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CategoryId = table.Column<long>(type: "bigint", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true)
                 },
@@ -198,11 +190,11 @@ namespace FinanceManager.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Cash" },
-                    { 2, "Debit/credit card" },
-                    { 3, "Checking" },
-                    { 4, "Loan" },
-                    { 5, "Deposit" }
+                    { new Guid("4b112d03-f439-413d-8f26-f6ac0361f25b"), "Loan" },
+                    { new Guid("978e7552-59f0-4a8d-81a3-7ef67c0f4762"), "Checking" },
+                    { new Guid("cc7f5623-d592-4229-875b-f957833a1f07"), "Debit/credit card" },
+                    { new Guid("f1a07ccc-d9fa-40d7-8482-2ef813bd01a8"), "Deposit" },
+                    { new Guid("ff898dca-a3bd-4ffc-8ed4-b19f1c239cca"), "Cash" }
                 });
 
             migrationBuilder.InsertData(
@@ -210,12 +202,12 @@ namespace FinanceManager.Infrastructure.Migrations
                 columns: new[] { "Id", "CurrencyCode", "CurrencySign", "Title" },
                 values: new object[,]
                 {
-                    { 1, "RUB", "₽", "Russian Ruble" },
-                    { 2, "BYN", "Br", "Belarusian Ruble" },
-                    { 3, "USD", "$", "United States Dollar" },
-                    { 4, "EUR", "€", "Euro" },
-                    { 5, "GBP", "£", "British Pound Sterling" },
-                    { 6, "TRY", "₺", "Turkish Lira" }
+                    { new Guid("048f5108-c044-4df0-88aa-7db21e5f2aca"), "USD", "$", "United States Dollar" },
+                    { new Guid("12124374-9e9b-4f96-aa04-15c20151afd9"), "TRY", "₺", "Turkish Lira" },
+                    { new Guid("29972ee4-5c83-4598-8ea7-40a2be44326b"), "EUR", "€", "Euro" },
+                    { new Guid("41191804-0a57-4f34-98c5-8e78668dfb23"), "GBP", "£", "British Pound Sterling" },
+                    { new Guid("5bfc35fd-9e17-4402-866b-044e6654ea0d"), "RUB", "₽", "Russian Ruble" },
+                    { new Guid("dcc3d13c-383e-4405-a844-bd99fae3d2bf"), "BYN", "Br", "Belarusian Ruble" }
                 });
 
             migrationBuilder.CreateIndex(

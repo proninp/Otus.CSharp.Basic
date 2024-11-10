@@ -24,20 +24,18 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Core.Models.Account", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("AccountTypeId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("AccountTypeId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Balance")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("CurrencyId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CurrencyId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsArchived")
                         .HasColumnType("boolean");
@@ -48,8 +46,8 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -64,11 +62,9 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Core.Models.AccountType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -81,47 +77,45 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("ff898dca-a3bd-4ffc-8ed4-b19f1c239cca"),
                             Name = "Cash"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("cc7f5623-d592-4229-875b-f957833a1f07"),
                             Name = "Debit/credit card"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("978e7552-59f0-4a8d-81a3-7ef67c0f4762"),
                             Name = "Checking"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = new Guid("4b112d03-f439-413d-8f26-f6ac0361f25b"),
                             Name = "Loan"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = new Guid("f1a07ccc-d9fa-40d7-8482-2ef813bd01a8"),
                             Name = "Deposit"
                         });
                 });
 
             modelBuilder.Entity("FinanceManager.Core.Models.Category", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long?>("ParentCategoryId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("ParentCategoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -134,11 +128,9 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Core.Models.Currency", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("CurrencyCode")
                         .IsRequired()
@@ -159,42 +151,42 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("5bfc35fd-9e17-4402-866b-044e6654ea0d"),
                             CurrencyCode = "RUB",
                             CurrencySign = "₽",
                             Title = "Russian Ruble"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("dcc3d13c-383e-4405-a844-bd99fae3d2bf"),
                             CurrencyCode = "BYN",
                             CurrencySign = "Br",
                             Title = "Belarusian Ruble"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("048f5108-c044-4df0-88aa-7db21e5f2aca"),
                             CurrencyCode = "USD",
                             CurrencySign = "$",
                             Title = "United States Dollar"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = new Guid("29972ee4-5c83-4598-8ea7-40a2be44326b"),
                             CurrencyCode = "EUR",
                             CurrencySign = "€",
                             Title = "Euro"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = new Guid("41191804-0a57-4f34-98c5-8e78668dfb23"),
                             CurrencyCode = "GBP",
                             CurrencySign = "£",
                             Title = "British Pound Sterling"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = new Guid("12124374-9e9b-4f96-aa04-15c20151afd9"),
                             CurrencyCode = "TRY",
                             CurrencySign = "₺",
                             Title = "Turkish Lira"
@@ -203,21 +195,19 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Core.Models.Transaction", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("AccountId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
-                    b.Property<long?>("CategoryId")
+                    b.Property<Guid?>("CategoryId")
                         .IsRequired()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -225,8 +215,8 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -241,11 +231,9 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Core.Models.Transfer", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -253,20 +241,20 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<long>("FromAccountId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("FromAccountId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("FromAmount")
                         .HasColumnType("numeric");
 
-                    b.Property<long>("ToAccountId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ToAccountId")
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("ToAmount")
                         .HasColumnType("numeric");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -281,11 +269,9 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Core.Models.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");

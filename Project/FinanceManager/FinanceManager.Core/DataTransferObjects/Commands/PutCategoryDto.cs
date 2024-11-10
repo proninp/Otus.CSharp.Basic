@@ -1,13 +1,17 @@
-﻿using FinanceManager.Core.Models;
+﻿using FinanceManager.Core.DataTransferObjects.Commands.Abstractions;
+using FinanceManager.Core.Models;
 
 namespace FinanceManager.Core.DataTransferObjects.Commands;
-public class PutCategoryDto
+public class PutCategoryDto : BasePutDto<Category>
 {
-    public long Id { get; init; }
+    public Guid? Id { get; init; }
 
-    public long UsertId { get; init; }
+    public Guid UsertId { get; init; }
 
     public string? Title { get; set; }
 
-    public long? ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
+
+    public override Category ToModel() =>
+        new Category(UsertId, Title, ParentCategoryId);
 }

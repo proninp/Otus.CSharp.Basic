@@ -1,8 +1,8 @@
-﻿namespace FinanceManager.Core.Models;
-public class User
-{
-    public long Id { get; init; }
+﻿using FinanceManager.Core.Models.Abstractions;
 
+namespace FinanceManager.Core.Models;
+public class User : BaseModel
+{
     public long TelegramId { get; init; }
 
     public string? Name { get; set; }

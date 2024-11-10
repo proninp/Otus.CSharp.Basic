@@ -1,19 +1,20 @@
-﻿namespace FinanceManager.Core.Models;
-public class Category
-{
-    public long Id { get; init; }
+﻿using FinanceManager.Core.Models.Abstractions;
 
-    public long UserId { get; init; }
+namespace FinanceManager.Core.Models;
+
+public class Category : BaseModel
+{
+    public Guid UserId { get; init; }
 
     public string? Title { get; set; }
 
-    public long? ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
 
     public Category? ParentCategory { get; set; }
 
     public ICollection<Category>? SubCategories { get; }
 
-    public Category(long userId, string? title = null, long? parentCategoryId = null)
+    public Category(Guid userId, string? title = null, Guid? parentCategoryId = null)
     {
         UserId = userId;
         Title = title;

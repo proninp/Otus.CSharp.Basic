@@ -3,13 +3,13 @@
 namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public class CategoryDto
 {
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
-    public long UserId { get; init; }
+    public Guid UserId { get; init; }
 
     public string? Title { get; set; }
 
-    public long? ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
 }
 
 public static class CategoryMappings
