@@ -7,9 +7,9 @@ using Microsoft.Extensions.Options;
 namespace FinanceManager.Infrastructure.Data;
 public sealed class AppDbContext : DbContext, IUnitOfWork
 {
-    private readonly DbOptions _options;
+    private readonly AppSettings _options;
 
-    public AppDbContext(IOptionsSnapshot<DbOptions> options)
+    public AppDbContext(IOptionsSnapshot<AppSettings> options)
     {
         _options = options.Value;
     }
@@ -31,7 +31,7 @@ public sealed class AppDbContext : DbContext, IUnitOfWork
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(_options.ConnectionString);
+            optionsBuilder.UseNpgsql(_options.DbConnectionString);
         }
     }
 

@@ -12,7 +12,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<DbOptions>(configuration.GetSection(nameof(DbOptions)));
+        services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
         services.AddDbContext<IUnitOfWork, AppDbContext>();
 
         services.AddHostedService<AppInitializer>();
