@@ -8,17 +8,16 @@ public class UserDto
     public long TelegramId { get; init; }
 
     public string? Name { get; init; }
-
 }
-
 public static class UserMappings
 {
     public static UserDto ToDto(this User user)
     {
-        return new UserDto() { 
+        return new UserDto()
+        {
             Id = user.Id,
             Name = user.Name,
-            TelegramId = user.TelegramId 
+            TelegramId = user.TelegramId
         };
     }
 }

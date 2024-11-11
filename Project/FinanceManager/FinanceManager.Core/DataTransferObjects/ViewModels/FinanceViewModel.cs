@@ -1,6 +1,4 @@
-﻿using FinanceManager.Core.Models;
-
-namespace FinanceManager.Core.DataTransferObjects.ViewModels;
+﻿namespace FinanceManager.Core.DataTransferObjects.ViewModels;
 public sealed class FinanceViewModel
 {
     public AccountDto[] Accounts { get; init; }
@@ -10,5 +8,4 @@ public sealed class FinanceViewModel
     public TransactionDto[] Transactions { get; init; }
 
     public TransferDto[] Transfers { get; init; }
-
 }
