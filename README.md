@@ -3,7 +3,7 @@
 
 [Home Works](HomeWorks/)
 
-[Project](Project/)
+[Project](https://github.com/proninp/Otus.CSharp.Basic.Project)
 
 * Страт обучения: 08.2024 г.
 * Длительность обучения: 6 месяцев
