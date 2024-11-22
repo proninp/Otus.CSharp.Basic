@@ -7,8 +7,16 @@ public class Employee : IComparable<Employee>
 
     public int CompareTo(Employee? other)
     {
-        if (other is null || other.Salary < Salary) return 1;
-        if (other.Salary > Salary) return -1;
-        return 0;
+        return CompareTo(other?.Salary ?? -1);
+    }
+
+    public int CompareTo(int salary)
+    {
+        return Comparer<int>.Default.Compare(Salary, salary);
+    }
+
+    public override string? ToString()
+    {
+        return $"{Name} - {Salary}";
     }
 }

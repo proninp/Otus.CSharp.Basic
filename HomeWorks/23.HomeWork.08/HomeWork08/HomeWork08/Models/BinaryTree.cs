@@ -1,8 +1,17 @@
-﻿namespace HomeWork08.Models;
-internal class BinaryTree<T>
-    where T : IComparable<T>
+﻿using System.ComponentModel.Design;
+using HomeWork08.Abstractions;
+
+namespace HomeWork08.Models;
+public class BinaryTree<T>
+    where T : class, IComparable<T>
 {
     private TreeNode<T>? _root;
+    private readonly IEntityPrinter<T> _printer;
+
+    public BinaryTree(IEntityPrinter<T> printer)
+    {
+        _printer = printer;
+    }
 
     public void Add(T value)
     {
@@ -32,24 +41,45 @@ internal class BinaryTree<T>
         }
     }
 
-    private TreeNode<T>? SymmetricTraverse(TreeNode<T>? node, Func<T, bool> selector)
+    public void SymmetricTraverse()
     {
-        if (node is null)
-            return default;
-
-        // TODO
-
-        if (selector(node.Value))
-            return node;
-    }
-
-    public T? Get(Func<T, bool> selector)
-    {
-        var node = SymmetricTraverse(_root, selector);
-        if (node is null)
-            return default;
-        return node.Value;
+        if (_root is not null)
+            SymmetricTraverse(_root);
     }
 
 
+    private void SymmetricTraverse(TreeNode<T> node)
+    {
+        if (node.Left is not null)
+            SymmetricTraverse(node.Left);
+
+        _printer.ShowInfo(node.Value);
+
+        if (node.Right is not null)
+            SymmetricTraverse(node.Right);
+    }
+
+    public T? Get(Func<T, int> comparer)
+    {
+        return Get(_root, comparer);
+    }
+
+    private T? Get(TreeNode<T>? node, Func<T, int> comparer)
+    {
+        if (node is null)
+            return default;
+        var compareResult = comparer(node.Value);
+        if (compareResult > 0)
+        {
+            return Get(node.Left, comparer);
+        }
+        else if (compareResult < 0)
+        {
+            return Get(node.Right, comparer);
+        }
+        else
+        {
+            return node.Value;
+        }
+    }
 }
