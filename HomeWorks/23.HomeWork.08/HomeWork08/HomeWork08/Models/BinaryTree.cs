@@ -41,45 +41,49 @@ public class BinaryTree<T>
         }
     }
 
-    public void SymmetricTraverse()
+    public void InOrderTraversal()
     {
         if (_root is not null)
-            SymmetricTraverse(_root);
+            InOrderTraversal(_root);
     }
 
 
-    private void SymmetricTraverse(TreeNode<T> node)
+    private void InOrderTraversal(TreeNode<T> node)
     {
         if (node.Left is not null)
-            SymmetricTraverse(node.Left);
+            InOrderTraversal(node.Left);
 
         _printer.ShowInfo(node.Value);
 
         if (node.Right is not null)
-            SymmetricTraverse(node.Right);
+            InOrderTraversal(node.Right);
     }
 
-    public T? Get(Func<T, int> comparer)
+    public T? Find(Func<T, int> comparer)
     {
-        return Get(_root, comparer);
+        return Find(_root, comparer);
     }
 
-    private T? Get(TreeNode<T>? node, Func<T, int> comparer)
+    private T? Find(TreeNode<T>? node, Func<T, int> comparer)
     {
         if (node is null)
             return default;
+
         var compareResult = comparer(node.Value);
         if (compareResult > 0)
         {
-            return Get(node.Left, comparer);
+            return Find(node.Left, comparer);
         }
         else if (compareResult < 0)
         {
-            return Get(node.Right, comparer);
+            return Find(node.Right, comparer);
         }
         else
         {
             return node.Value;
         }
     }
+
+    public void Clear() =>
+        _root = null;
 }
