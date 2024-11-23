@@ -1,7 +1,8 @@
-﻿using HomeWork08.Models;
+﻿using HomeWork08.Abstractions;
+using HomeWork08.Models;
 using Spectre.Console;
 
-namespace HomeWork08;
+namespace HomeWork08.Services;
 public class EmployeeManager : IEmployeeManager
 {
     private readonly List<Employee> _dataSeeder = new List<Employee>()
@@ -23,15 +24,15 @@ public class EmployeeManager : IEmployeeManager
             .AllowEmpty());
         if (string.IsNullOrWhiteSpace(name))
             yield break;
-        
-        var salary = AnsiConsole.Ask<int>($"Введите [green]зарплату[/] для сотрудника [yellow]{name}[/]:");
+
+        var salary = AnsiConsole.Ask<uint>($"Введите [green]зарплату[/] для сотрудника [yellow]{name}[/]:");
 
         yield return new Employee { Name = name, Salary = salary };
     }
 
-    public int GetSalary()
+    public uint GetSalary()
     {
-        var salary = AnsiConsole.Ask<int>($"Введите [green]зарплату[/] для поиска сотрудника:");
+        var salary = AnsiConsole.Ask<uint>($"Введите [green]зарплату[/] для поиска сотрудника:");
         return salary;
     }
 }

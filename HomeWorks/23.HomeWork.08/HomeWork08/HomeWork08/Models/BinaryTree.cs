@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.Design;
-using HomeWork08.Abstractions;
+﻿using HomeWork08.Abstractions;
 
 namespace HomeWork08.Models;
-public class BinaryTree<T>
+public sealed class BinaryTree<T>
     where T : class, IComparable<T>
 {
     private TreeNode<T>? _root;

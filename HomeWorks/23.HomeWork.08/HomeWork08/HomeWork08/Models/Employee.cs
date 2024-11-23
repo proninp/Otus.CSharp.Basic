@@ -1,18 +1,18 @@
 ﻿namespace HomeWork08.Models;
-public class Employee : IComparable<Employee>
+public sealed class Employee : IComparable<Employee>
 {
     public required string Name { get; init; }
 
-    public required int Salary { get; init; }
+    public required uint Salary { get; init; }
 
     public int CompareTo(Employee? other)
     {
-        return CompareTo(other?.Salary ?? -1);
+        return CompareTo(other?.Salary ?? 0);
     }
 
-    public int CompareTo(int salary)
+    public int CompareTo(uint salary)
     {
-        return Comparer<int>.Default.Compare(Salary, salary);
+        return Comparer<uint>.Default.Compare(Salary, salary);
     }
 
     public override string? ToString()

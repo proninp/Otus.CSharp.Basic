@@ -1,5 +1,5 @@
 ﻿namespace HomeWork08.Models;
-public class TreeNode<T> where T : IComparable<T>
+public sealed class TreeNode<T> where T : IComparable<T>
 {
     public required T Value { get; set; }
 
