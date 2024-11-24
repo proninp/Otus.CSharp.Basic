@@ -7,6 +7,7 @@ var services = new ServiceCollection();
 
 services.AddTransient<IPrinter, ConsolePrinterBase>();
 services.AddTransient<IEntityPrinter<Employee>, EmployeeConsolePrinter>();
+services.AddTransient<IInputService, InputService>();
 services.AddTransient<IEmployeeManager, EmployeeManager>();
 services.AddTransient<BinaryTree<Employee>>();
 services.AddTransient<MenuService>();

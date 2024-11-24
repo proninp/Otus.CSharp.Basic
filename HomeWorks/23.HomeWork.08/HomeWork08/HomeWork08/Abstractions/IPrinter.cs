@@ -6,6 +6,4 @@ public interface IPrinter
     void Print(string text);
 
     void NewLine();
-
-    string Prompt(string proptTitle, IEnumerable<string> choices);
 }

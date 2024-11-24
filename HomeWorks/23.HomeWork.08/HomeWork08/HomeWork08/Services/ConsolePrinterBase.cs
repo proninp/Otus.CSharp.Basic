@@ -10,23 +10,9 @@ public class ConsolePrinterBase : IPrinter
         AnsiConsole.MarkupLine($"[bold]{text}[/]");
     }
 
-    public void Print(string text)
-    {
+    public void Print(string text) =>
         AnsiConsole.MarkupLine(text);
-    }
 
-    public string Prompt(string promptTitle, IEnumerable<string> choices)
-    {
-        var actionText = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title(promptTitle)
-                    .AddChoices(choices));
-
-        return actionText;
-    }
-
-    public void NewLine()
-    {
+    public void NewLine() =>
         AnsiConsole.WriteLine();
-    }
 }

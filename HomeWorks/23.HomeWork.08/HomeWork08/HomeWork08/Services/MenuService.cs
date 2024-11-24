@@ -2,37 +2,45 @@
 using HomeWork08.Models;
 
 namespace HomeWork08.Services;
-public sealed class MenuService(IPrinter printer)
+public sealed class MenuService
 {
+    private readonly IPrinter _printer;
+    private readonly IInputService _inputService;
+
+    public MenuService(IPrinter printer, IInputService inputService)
+    {
+        _printer = printer;
+        _inputService = inputService;
+    }
+
     public event EventHandler? Restart;
     public event EventHandler? FindEmployee;
 
     public bool SelectMenu(Dictionary<WorkMode, string> choices)
     {
-        var actionText = printer.Prompt("[green]Выберите режим работы:[/]", choices.Values);
-
+        var actionText = _inputService.Prompt("[green]Выберите режим работы:[/]", choices.Values);
         var action = choices.First(kvp => kvp.Value == actionText).Key;
 
-        printer.NewLine();
+        _printer.NewLine();
 
         switch (action)
         {
             case WorkMode.Restart:
-                printer.Print("[blue]Вы выбрали начать заново.[/]");
+                _printer.Print("[blue]Вы выбрали начать заново.[/]");
                 OnRestart();
                 OnFindEmployee();
                 break;
 
             case WorkMode.FindEmployee:
-                printer.Print("[yellow]Вы выбрали продолжить поиск.[/]");
+                _printer.Print("[yellow]Вы выбрали продолжить поиск.[/]");
                 OnFindEmployee();
                 break;
 
             case WorkMode.Exit:
-                printer.Print("[red]Выход из программы.[/]");
+                _printer.Print("[red]Выход из программы.[/]");
                 return false;
         }
-        printer.NewLine();
+        _printer.NewLine();
         return true;
     }
 
