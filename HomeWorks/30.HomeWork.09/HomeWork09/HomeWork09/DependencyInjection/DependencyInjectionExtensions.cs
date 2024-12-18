@@ -1,5 +1,7 @@
-﻿using HomeWork09.Options;
+﻿using HomeWork09.Abstract;
+using HomeWork09.Options;
 using HomeWork09.Services;
+using HomeWork09.Services.Telegram;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,15 +25,24 @@ public static class DependencyInjectionExtensions
     {
         services
             .Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)))
-            .AddScoped<AppService>();
+            .AddScoped<IBotInfoProvider, BotInfoProvider>()
+            .AddSingleton<IUpdateEventProvider, UpdateEventProvider>()
+            .AddSingleton<ICancellationTokenProvider, CancellationTokenProvider>()
+            .AddScoped<AppService>()
+            .AddHostedService<AppServiceWorker>();
 
-            services.AddHttpClient("telegram_bot_client").RemoveAllLoggers()
+        services.AddHttpClient("telegram_bot_client").RemoveAllLoggers()
             .AddTypedClient<ITelegramBotClient>((httpClient, sp) =>
             {
                 AppSettings botConfiguration = sp.GetRequiredService<IOptionsSnapshot<AppSettings>>().Value;
                 TelegramBotClientOptions options = new(botConfiguration.BotToken);
                 return new TelegramBotClient(options, httpClient);
             });
+
+        services
+            .AddScoped<UpdateHandler>()
+            .AddScoped<ReceiverService>()
+            .AddHostedService<PollingService>();
 
         return services;
     }

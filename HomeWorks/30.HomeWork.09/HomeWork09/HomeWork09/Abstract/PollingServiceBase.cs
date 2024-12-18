@@ -3,7 +3,10 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace HomeWork09.Abstract;
-public abstract class PollingServiceBase<TReceiverService>(IServiceProvider serviceProvider, ILogger logger)
+public abstract class PollingServiceBase<TReceiverService>(
+    IServiceProvider serviceProvider,
+    IUpdateEventProvider eventProvider,
+    ILogger logger)
     : BackgroundService where TReceiverService : IReceiverService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -14,6 +17,14 @@ public abstract class PollingServiceBase<TReceiverService>(IServiceProvider serv
 
     private async Task DoWork(CancellationToken stoppingToken)
     {
+        Action<string> messageHandlerStart = message =>
+            logger.Information($"В OnHandleUpdateStarted началась обработка ообщения: '{message}'");
+        Action<string> messageHandlerComplete = message =>
+            logger.Information($"В OnHandleUpdateCompleted закончилась обработка ообщения: '{message}'");
+
+        eventProvider.OnHandleUpdateStarted += messageHandlerStart;
+        eventProvider.OnHandleUpdateCompleted += messageHandlerComplete;
+
         while (!stoppingToken.IsCancellationRequested)
         {
             try
@@ -27,6 +38,11 @@ public abstract class PollingServiceBase<TReceiverService>(IServiceProvider serv
                 logger.Error("Polling failed with exception: {Exception}", ex);
                 // Cooldown if something goes wrong
                 await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+            }
+            finally
+            {
+                eventProvider.OnHandleUpdateStarted -= messageHandlerStart;
+                eventProvider.OnHandleUpdateCompleted -= messageHandlerComplete;
             }
         }
     }
