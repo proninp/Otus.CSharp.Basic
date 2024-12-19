@@ -1,4 +1,4 @@
-﻿namespace HomeWork09.Abstract;
+﻿namespace HomeWork09.Application.Abstract;
 public interface IBotInfoProvider
 {
     string BotInfo { get; set; }

@@ -1,8 +1,8 @@
-﻿using HomeWork09.Abstract;
+﻿using HomeWork09.Application.Abstract;
 using Serilog;
 using Telegram.Bot;
 
-namespace HomeWork09.Services.Telegram;
+namespace HomeWork09.Application.Services.Telegram;
 public class ReceiverService(
     ITelegramBotClient botClient,
     UpdateHandler updateHandler,

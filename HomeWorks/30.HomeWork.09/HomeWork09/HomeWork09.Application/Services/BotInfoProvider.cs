@@ -1,6 +1,6 @@
-﻿using HomeWork09.Abstract;
+﻿using HomeWork09.Application.Abstract;
 
-namespace HomeWork09.Services;
+namespace HomeWork09.Application.Services;
 public class BotInfoProvider : IBotInfoProvider
 {
     private string _botInfo = "Информация о боте отсутствует";
