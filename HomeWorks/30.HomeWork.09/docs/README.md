@@ -76,29 +76,29 @@ var catFact = await client.GetFromJsonAsync<CatFactDto>("https://catfact.ninja/f
 * `GET`: `/api/TelegramBot/info` - получение нформации о состоянии бота
 * `POST`: `/api/TelegramBot/stop` - остановка работы бота через передачу токена отмены
 
-![api](docs/images/01.png)
+![api](images/01.png)
 
 
 Информация о боте после старта приложения:
 
-![info1](/images/02.png)
+![info1](images/02.png)
 
 
 Информация о боте после отправки сообшения:
 
-![info2](/docs/images/03.png)
+![info2](images/03.png)
 
 
 Выполнение команды остановки бота:
 
-![stop](/docs/images/04.png)
+![stop](images/04.png)
 
 
 Информация о боте после выполнения запроса остановки:
 
-![info3](/docs/images/05.png)
+![info3](images/05.png)
 
 
 Пример выполнения команды `\cat`:
 
-![catFact](/docs/images/06.png)
+![catFact](images/06.png)
