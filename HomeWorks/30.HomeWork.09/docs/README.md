@@ -67,3 +67,38 @@ var catFact = await client.GetFromJsonAsync<CatFactDto>("https://catfact.ninja/f
 * Пункт 6: +2 балла
 
 Для сдачи достаточно 8 баллов.
+
+
+## Решение
+
+Решение выполнено с использование Web Api.
+Реализованы два Api метода:
+* `GET`: `/api/TelegramBot/info` - получение нформации о состоянии бота
+* `POST`: `/api/TelegramBot/stop` - остановка работы бота через передачу токена отмены
+
+![api](/docs/images/01.png)
+
+
+Информация о боте после старта приложения:
+
+![info1](/docs/images/02.png)
+
+
+Информация о боте после отправки сообшения:
+
+![info2](/docs/images/03.png)
+
+
+Выполнение команды остановки бота:
+
+![stop](/docs/images/04.png)
+
+
+Информация о боте после выполнения запроса остановки:
+
+![info3](/docs/images/05.png)
+
+
+Пример выполнения команды `\cat`:
+
+![catFact](/docs/images/06.png)
