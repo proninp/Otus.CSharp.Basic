@@ -1,4 +1,4 @@
-using HomeWork09.API.DTOs;
+using HomeWork09.Application.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeWork09.API.Controllers;
@@ -6,20 +6,23 @@ namespace HomeWork09.API.Controllers;
 [Route("api/[controller]")]
 public class TelegramBotController : ControllerBase
 {
-    private readonly Serilog.ILogger _logger;
+    private readonly IBotManager _botManager;
 
-    public TelegramBotController(Serilog.ILogger logger)
+    public TelegramBotController(IBotManager botManager)
     {
-        _logger = logger;
+        _botManager = botManager;
     }
 
-    [HttpPost(Name = "StopBot")]
-    public async Task<ActionResult<BotCommandResponse>> PostContact([FromBody] BotCommandRequest request)
+    [HttpGet("info")]
+    public IActionResult Info()
     {
-        _logger.Information($"Полчен запрос: '{request}'");
+        return Ok(_botManager.Info());
+    }
 
-        
-
-        return Ok();
+    [HttpPost("stop")]
+    public IActionResult StopBot()
+    {
+        _botManager.Stop();
+        return Ok("Бот остановлен");
     }
 }

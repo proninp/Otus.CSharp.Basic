@@ -3,7 +3,7 @@
 namespace HomeWork09.Application.Services;
 public sealed class CancellationTokenProvider : ICancellationTokenProvider
 {
-    private readonly CancellationTokenSource _cts = new();
+    private CancellationTokenSource _cts = new();
 
     public CancellationToken Token => _cts.Token;
 

@@ -20,6 +20,7 @@ public static class DependencyInjection
             .AddSingleton<IUpdateEventProvider, UpdateEventProvider>()
             .AddSingleton<ICancellationTokenProvider, CancellationTokenProvider>()
             .AddSingleton<IBotInfoProvider, BotInfoProvider>()
+            .AddScoped<IBotManager, BotManager>()
             .AddHostedService<BotInitializer>();
         return services;
     }

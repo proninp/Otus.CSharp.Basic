@@ -28,10 +28,8 @@ public abstract class ReceiverServiceBase<TUpdateHandler> : IReceiverService
         var receiverOptions = new ReceiverOptions() { DropPendingUpdates = true, AllowedUpdates = [] };
 
         var me = await _botClient.GetMe(stoppingToken);
-        var botInfo = me.Username ?? "My Awesome Bot";
-        _botInfoProvider.BotInfo = botInfo;
-        _logger.Information($"Бот {botInfo} работает, время: {DateTime.Now}");
-
+        _botInfoProvider.Info = $"Бот {me.Username} запущен, время: {DateTime.Now}";
+        _logger.Information(_botInfoProvider.GetBotInfo());
         await _botClient.ReceiveAsync(_updateHandler, receiverOptions, stoppingToken);
     }
 }

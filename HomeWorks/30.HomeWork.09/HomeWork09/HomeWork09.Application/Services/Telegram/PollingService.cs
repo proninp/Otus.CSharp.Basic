@@ -6,12 +6,18 @@ public class PollingService : IPollingService
 {
     private readonly IReceiverService _receiver;
     private readonly IUpdateEventProvider _eventProvider;
+    private readonly IBotInfoProvider _botInfoProvider;
     private readonly ILogger _logger;
 
-    public PollingService(IReceiverService receiver, IUpdateEventProvider eventProvider, ILogger logger)
+    public PollingService(
+        IReceiverService receiver,
+        IUpdateEventProvider eventProvider,
+        IBotInfoProvider botInfoProvider,
+        ILogger logger)
     {
         _receiver = receiver;
         _eventProvider = eventProvider;
+        _botInfoProvider = botInfoProvider;
         _logger = logger;
     }
 
@@ -31,11 +37,17 @@ public class PollingService : IPollingService
             {
                 await _receiver.ReceiveAsync(stoppingToken);
             }
+            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            {
+                _logger.Error("Polling canceled with canceled exception");
+                _botInfoProvider.Reset();
+            }
             catch (Exception ex)
             {
                 _logger.Error("Polling failed with exception: {Exception}", ex);
+                _botInfoProvider.Reset();
                 // Cooldown if something goes wrong
-                await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
             }
             finally
             {
