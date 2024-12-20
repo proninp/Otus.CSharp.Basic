@@ -6,7 +6,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 
 namespace HomeWork09.Application.Services.Telegram;
-public class UpdateHandler : IUpdateHandler
+public sealed class UpdateHandler : IUpdateHandler
 {
     private readonly IUpdateEventProvider _eventProvider;
     private readonly IBotInfoProvider _botInfoProvider;

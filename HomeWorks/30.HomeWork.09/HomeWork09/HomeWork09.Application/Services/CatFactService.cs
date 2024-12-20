@@ -1,4 +1,5 @@
-﻿using HomeWork09.Application.Abstract;
+﻿using System.Text.Json;
+using HomeWork09.Application.Abstract;
 using HomeWork09.Application.DTOs;
 using HomeWork09.Application.Options;
 using Microsoft.Extensions.Options;
@@ -37,14 +38,14 @@ public sealed class CatFactService : ICatFactService
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            return System.Text.Json.JsonSerializer.Deserialize<CatFactDto>(content);
+            return JsonSerializer.Deserialize<CatFactDto>(content);
         }
         catch (HttpRequestException ex)
         {
             _logger.Error($"HTTP Request failed: {ex.Message}");
             return null;
         }
-        catch (System.Text.Json.JsonException ex)
+        catch (JsonException ex)
         {
             _logger.Error($"JSON Parsing failed: {ex.Message}");
             return null;

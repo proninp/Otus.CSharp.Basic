@@ -2,7 +2,7 @@
 using Serilog;
 
 namespace HomeWork09.Application.Services.Telegram;
-public class PollingService : IPollingService
+public sealed class PollingService : IPollingService
 {
     private readonly IReceiverService _receiver;
     private readonly IUpdateEventProvider _eventProvider;

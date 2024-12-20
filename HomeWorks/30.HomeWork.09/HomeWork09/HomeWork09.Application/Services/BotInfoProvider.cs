@@ -2,7 +2,7 @@
 using HomeWork09.Application.Abstract;
 
 namespace HomeWork09.Application.Services;
-public class BotInfoProvider : IBotInfoProvider
+public sealed class BotInfoProvider : IBotInfoProvider
 {
     private const string NoInformationText = "Информация о боте отсутствует";
 

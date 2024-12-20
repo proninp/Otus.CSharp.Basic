@@ -3,7 +3,7 @@ using Serilog;
 using Telegram.Bot;
 
 namespace HomeWork09.Application.Services.Telegram;
-public class ReceiverService(
+public sealed class ReceiverService(
     ITelegramBotClient botClient,
     UpdateHandler updateHandler,
     IBotInfoProvider botInfoProvider,
