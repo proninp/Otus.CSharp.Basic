@@ -4,22 +4,24 @@ using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace HomeWork09.Application.Services.Telegram;
 public class UpdateHandler : IUpdateHandler
 {
-    private readonly ITelegramBotClient _botClient;
     private readonly IUpdateEventProvider _eventProvider;
     private readonly IBotInfoProvider _botInfoProvider;
+    private readonly ITelegramCommandHandlerFactory _handlerFactory;
     private readonly ILogger _logger;
 
-    public UpdateHandler(ITelegramBotClient botClient, IUpdateEventProvider eventProvider, IBotInfoProvider infoProvider, ILogger logger)
+    public UpdateHandler(
+        IUpdateEventProvider eventProvider,
+        IBotInfoProvider infoProvider,
+        ITelegramCommandHandlerFactory handlerFactory,
+        ILogger logger)
     {
-        _botClient = botClient;
         _eventProvider = eventProvider;
         _botInfoProvider = infoProvider;
+        _handlerFactory = handlerFactory;
         _logger = logger;
     }
 
@@ -56,10 +58,12 @@ public class UpdateHandler : IUpdateHandler
         _eventProvider.RaiseUpdateStarted(message.Text);
         _botInfoProvider.LastMessageInfo = $"Последнее принятое сообщение в {DateTime.Now}: '{message.Text}'";
 
-        var echo = $"Сообщение успешно принято: '{messageText}'";
-        var sentMessage = await _botClient.SendMessage(message.Chat, echo, parseMode: ParseMode.Html, replyMarkup: new ReplyKeyboardRemove());
+        var commandHandler = _handlerFactory.GetResponseHandler(message.Text);
+        var sentMessage = await commandHandler.Handle(message);
 
-        _logger.Information($"The message was sent with id: {sentMessage.Id}");
+        if (sentMessage is not null)
+            _logger.Information($"The message was sent with id: {sentMessage.Id}");
+
         _eventProvider.RaiseUpdateCompleted(message.Text);
     }
 
