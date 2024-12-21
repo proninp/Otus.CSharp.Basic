@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 
 var dir1 = @"C:\Otus\TestDir1";
 var dir2 = @"C:\Otus\TestDir2";
@@ -23,7 +22,7 @@ static async Task CreateAndWriteFilesAsync(DirectoryInfo directory)
 {
     for (int i = 0; i < 10; i++)
     {
-        var fileName = $"File{i}.txt";
+        var fileName = $"File{i + 1}.txt";
         var filePath = Path.Combine(directory.FullName, fileName);
 
         await CreateAndWriteFileAsync(fileName, filePath);
@@ -67,7 +66,8 @@ static void ReadAndPrintFile(FileInfo? file)
     try
     {
         var content = File.ReadAllText(file.FullName, Encoding.UTF8);
-        Console.WriteLine($"{file.FullName}: {content}");
+        Console.WriteLine($"{file.FullName}:{Environment.NewLine}{content}");
+        Console.WriteLine();
     }
     catch (FileNotFoundException)
     {
