@@ -26,3 +26,39 @@
 * Пункт 5 - 1 балла
 
 Минимальный балл: 7
+
+## Решение
+
+В процессе решения использовалась [статья](https://simpledevcode.wordpress.com/2015/07/07/hash-tables-tutorial-c-c-java/)
+
+```cs
+static void Main(string[] args)
+{
+	var arr = new string[] { "Zero", "One", "Two", "Three", "Four", "Five" };
+	var map = new OtusDictionary();
+
+	for (int i = 0; i < arr.Length; i++)
+		map.Add(i, arr[i]);
+
+	for (int i = 0; i < arr.Length; i++)
+		Console.WriteLine($"Key: {i}; Value: {map.Get(i)}");
+
+	Console.WriteLine();
+	map[3] = "Three by Indexer";
+	Console.WriteLine($"Key: {3}; Value: {map[3]}");
+
+	Console.ReadLine();
+}
+```
+
+Вывод
+```shell
+Key: 0; Value: Zero
+Key: 1; Value: One
+Key: 2; Value: Two
+Key: 3; Value: Three
+Key: 4; Value: Four
+Key: 5; Value: Five
+
+Key: 3; Value: Three by Indexer
+```
