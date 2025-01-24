@@ -65,7 +65,7 @@ async Task CalculatePercents()
 {
     while (true)
     {
-        Parallel.ForEach(library, (kvp) => 
+        Parallel.ForEach(library, (kvp) =>
         {
             if (kvp.Value < 100)
                 library[kvp.Key]++;
