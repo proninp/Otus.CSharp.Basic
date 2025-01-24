@@ -79,3 +79,8 @@
 
 ## Решение
 
+[Постоянный покупатель](HomeWork12/HomeWork12.RegularCustomer)
+
+[Библиотекарь](HomeWork12/HomeWork12.Librarian)
+
+[Дом, который построил Джек](HomeWork12/HomeWork12.JacksHouse)
