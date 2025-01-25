@@ -18,7 +18,6 @@ void ShowMenu()
                 .AddChoices(Enum.GetValues<Menu>())
                 .UseConverter(option => option.GetDescription()));
 
-
         switch (choice)
         {
             case Menu.AddABook:

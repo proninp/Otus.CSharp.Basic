@@ -2,12 +2,11 @@
 using Task1;
 
 var shop = new Shop();
-var cutomer1 = new Customer("Магазин 1");
-var cutomer2 = new Customer("Магазин 2");
+var customer1 = new Customer("Магазин 1");
+var customer2 = new Customer("Магазин 2");
 
-
-shop.AddObserver(cutomer1);
-shop.AddObserver(cutomer2);
+customer1.Subscribe(shop);
+customer2.Subscribe(shop);
 
 SeedShopData(shop);
 AnsiConsole.WriteLine();
@@ -59,6 +58,4 @@ void SeedShopData(Shop shop)
     shop.AddItem();
     shop.AddItem();
     shop.AddItem();
-    shop.Remove(1);
-    shop[1] = new Item(shop.GetNewItemId());
 }
