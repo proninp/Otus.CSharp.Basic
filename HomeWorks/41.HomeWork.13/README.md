@@ -23,3 +23,34 @@
 * Пункт 4: 1 балл
 
 Минимальный проходной балл: 6.
+
+## Решение
+
+```csharp
+var list = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+var listPart = list.Top(30);
+Console.WriteLine(string.Join(", ", listPart));
+
+var persons = new List<Person>()
+{
+    new Person("Bjarne", 74),
+    new Person("Linus", 55),
+    new Person("James", 69),
+    new Person("Bill", 69),
+    new Person("Guido", 68),
+    new Person("Brendan", 63)
+};
+
+var personsPart = persons.Top(50, p => p.Age);
+Console.WriteLine(string.Join("\n", personsPart));
+```
+
+Вывод
+
+```shell
+9, 8, 7
+Bjarne with age 74
+James with age 69
+Bill with age 69
+```
