@@ -6,7 +6,7 @@ public sealed class Product : BaseModel
 {
     public string Name { get; set; } = null!;
 
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     public int StockQuantity { get; set; }
 
