@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="linq2db.AspNet" Version="5.4.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeWork16.Application\HomeWork16.Application.csproj" />
+    <ProjectReference Include="..\HomeWork16.Infrastructure\HomeWork16.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

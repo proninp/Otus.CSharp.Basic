@@ -1,19 +1,16 @@
-﻿using HomeWork16.Domain;
-using HomeWork16.Domain.Models;
-using HomeWork16.Domain.Options;
+﻿using HomeWork16.Domain.Models;
 using HomeWork16.Infrastructure.Configurations;
 using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.Mapping;
-using LinqToDB.Metadata;
-using Microsoft.Extensions.Options;
 
 namespace HomeWork16.Infrastructure.Data;
 public class DatabaseContext : DataConnection
 {
-    public DatabaseContext(IOptionsSnapshot<AppSettings> options, IMetadataReader metadataReader)
-        : base(options.Value.ProviderName, options.Value.DbConnectionString, GetCombinedMappingSchema())
+    public DatabaseContext(DataOptions<DatabaseContext> options)
+        : base(options.Options)
     {
+        AddMappingSchema(GetCombinedMappingSchema());
     }
 
     public ITable<Customer> Customers => this.GetTable<Customer>();

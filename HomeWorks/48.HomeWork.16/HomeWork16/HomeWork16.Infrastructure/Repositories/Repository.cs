@@ -1,4 +1,5 @@
-﻿using HomeWork16.Domain.Interfaces.Repositories;
+﻿using System.Linq.Expressions;
+using HomeWork16.Domain.Interfaces.Repositories;
 using HomeWork16.Domain.Models.Abstractions;
 using HomeWork16.Infrastructure.Data;
 using LinqToDB;
@@ -16,8 +17,10 @@ public sealed class Repository<T> : IRepository<T>
         _table = _db.GetTable<T>();
     }
 
-    public async Task<IEnumerable<T>> GetAsync(
+    public async Task<IEnumerable<TView>> GetAsync<TView>(
+        Func<T, TView> selector,
         Func<IQueryable<T>, ILoadWithQueryable<T, object>>? include = null,
+        Expression<Func<T, bool>>? predicate = null,
         CancellationToken cancellationToken = default)
     {
         var query = _table.AsQueryable();
@@ -25,21 +28,29 @@ public sealed class Repository<T> : IRepository<T>
         if (include is not null)
             query = include(query);
 
-        return await query.ToListAsync(cancellationToken);
+        if (predicate is not null)
+            query = query.Where(predicate);
+
+        return await query
+            .Select(x => selector(x))
+            .ToListAsync(cancellationToken);
     }
 
-    public async Task<T?> GetByIdAsync(
+    public async Task<TView?> GetByIdAsync<TView>(
         int id,
+        Func<T, TView> selector,
         Func<IQueryable<T>, ILoadWithQueryable<T, object>>? include = null,
         CancellationToken cancellationToken = default)
     {
-        var query = _table
+        var query = _table.AsQueryable()
             .Where(x => x.Id == id);
 
         if (include is not null)
             query = include(query);
 
-        return await query.FirstOrDefaultAsync(cancellationToken);
+        return await query
+            .Select(x => selector(x))
+            .FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<T> AddAsync(T model, CancellationToken cancellationToken)

@@ -1,10 +1,9 @@
-﻿using HomeWork16.Domain;
+﻿using HomeWork16.Domain.Models;
 using LinqToDB.Mapping;
 
 namespace HomeWork16.Infrastructure.Configurations;
 public sealed class CustomerMappingSchema : MappingSchema
 {
-
     public CustomerMappingSchema()
     {
         var builder = new FluentMappingBuilder(this);
