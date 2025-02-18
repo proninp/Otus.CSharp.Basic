@@ -1,7 +1,6 @@
-﻿using HomeWork16.Domain.Models;
-using HomeWork16.Domain.Models.Abstractions;
+﻿using HomeWork16.Domain.Models.Abstractions;
 
-namespace HomeWork16.Domain;
+namespace HomeWork16.Domain.Models;
 
 
 public sealed class Customer : BaseModel
@@ -11,6 +10,4 @@ public sealed class Customer : BaseModel
     public string LastName { get; set; } = null!;
 
     public int Age { get; set; }
-
-    public ICollection<Order> Orders { get; set; } = new List<Order>();
 }

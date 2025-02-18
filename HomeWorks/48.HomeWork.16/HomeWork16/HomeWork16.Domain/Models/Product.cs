@@ -1,6 +1,6 @@
 ﻿using HomeWork16.Domain.Models.Abstractions;
 
-namespace HomeWork16.Domain;
+namespace HomeWork16.Domain.Models;
 
 public sealed class Product : BaseModel
 {
