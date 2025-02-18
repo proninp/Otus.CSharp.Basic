@@ -21,3 +21,16 @@ Dapper / Linq2sql
 * 4: +1 балл
 
 ## Решение
+
+### CustomerController
+
+![CustomerController](img/CustomerController.png)
+
+
+### ProductController
+
+![ProductController](img/ProductController.png)
+
+### OrderController
+
+![OrderController](img/OrderController.png)
